@@ -4,35 +4,54 @@
 
 {% block content %}
 
-<h1>HELLO</h1>
+<div class="container home-container">
 
+    <h1>HELLO</h1>
+    <div class="property-filter">
+        <form method="get">
+            <select name="advert_type">
+                {% for value, display in advert_type_choices %}
+                    <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
+            </select>
+            <select name="property_type">
+                {% for value, display in property_type_choices %}
+                    <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
+            </select>
+            <label for="price_min">Min Price:</label>
+            <input type="number" name="price_min" id="price_min" value="{{ filter_form.price.value.min }}">
+            <label for="price_max">Max Price:</label>
+            <input type="number" name="price_max" id="price_max" value="{{ filter_form.price.value.max }}">
+            
+            <input type="submit" value="Filter">
+            <a class="btn ml-auto mr-2" href="{% url 'home' %}"> Clear All </a>
+        
+        </form>
 
-<form method="get">
-    <select name="advert_type">
-        {% for value, display in advert_type_choices %}
-            <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
+    </div>
+    <div class="property-gallery">
+        {% for property in properties %}
+            <div>
+                <h2>{{ property.advert_type }}</h2>
+                <p>{{ property.property_type }}</p>
+                <p>{{ property.price }}</p>
+            </div>
+        {% empty %}
+            <p>No properties found.</p>
+
         {% endfor %}
-    </select>
-    <select name="property_type">
-        {% for value, display in property_type_choices %}
-            <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Filter">
-    <a class="btn ml-auto mr-2" href="{% url 'home' %}"> Clear All </a>
 
-</form>
+    </div>
+
+
+
+
+
   
 
-{% for property in properties %}
-    <div>
-        <h2>{{ property.advert_type }}</h2>
-        <p>{{ property.property_type }}</p>
-        <p>{{ property.price }}</p>
-    </div>
-{% empty %}
-    <p>No properties found.</p>
 
-{% endfor %}
+
+</div>
 
 {% endblock %}

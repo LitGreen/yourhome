@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="multiselect-filter container">
+    {% if show_multiselect_form %}
+    <form method="POST" class="lmultiselect-filter-form form-inline d-grid gap-2 pb-4 pt-3" action="">
+      <div class="form-group">
+        {% csrf_token %}
+        <label>Advanced Filter:</label>
+      </div>
+
+      <input type="submit" type="button" id="submit-btn" class="submit-filter btn btn-primary btn-sm mt-3 mb-2" value="Filter" />
+    </form>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock content %}
