@@ -54,8 +54,8 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Postcode"), max_length=100, default="140"
     )
 
-    price = models.DecimalField(
-        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0
+    price = models.IntegerField(
+        verbose_name=_("Price")
     )
 
     plot_area = models.DecimalField(
