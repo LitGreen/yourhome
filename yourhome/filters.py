@@ -17,6 +17,3 @@ class PropertyFilter(django_filters.FilterSet):
     class Meta:
         model = Property
         fields = ["advert_type", "property_type", "price"]
-
-class MultiselectFilter(django_filters.FilterSet):
-    pass
