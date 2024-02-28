@@ -1,34 +1,31 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-<!-- <div class="multiselect-filter container">
-    <form method="POST" class="filter_form form form-inline pb-4 ps-4 pt-3" action="">
-        <div class="form-group">
-            {% csrf_token %}
-            {{ form.as_p }}
-          <input type="submit" id="submit-btn" class="btn btn-sm btn-primary" value="Submit" />
-        </div>
-      </form>
-</div> -->
-<!-- <div class="multiselect-filter container">
+<div class="multiselect_filter container">
     <form method="GET" class="filter_form form form-inline pb-4 ps-4 pt-3" action="">
         <div class="form-group">
-            {{ form.as_p }}
-          <input type="submit" id="submit-btn" class="btn btn-sm btn-primary" value="Submit" />
+            {% for field in form %}
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" id="submit-btn" class="btn btn-sm btn-primary" value="Submit" />
+            <a class="btn ml-auto mr-2" href="{% url 'multiselect_filter' %}"> Clear All </a>
         </div>
-      </form>
-</div> -->
-<form method="GET" class="filter_form form form-inline pb-4 ps-4 pt-3" action="">
-    <div class="form-group">
-        {% for field in form %}
+    </form>
+    <div class="property-gallery">
+        {% for property in properties %}
             <div>
-                {{ field.label_tag }}
-                {{ field }}
+                <h2>{{ property.advert_type }}</h2>
+                <p>{{ property.property_type }}</p>
+                <p>{{ property.price }}</p>
             </div>
+        {% empty %}
+            <p>No properties found.</p>
+    
         {% endfor %}
-        <input type="submit" id="submit-btn" class="btn btn-sm btn-primary" value="Submit" />
-    </div>
-</form>
+</div>
+
 
 {% endblock content %}
