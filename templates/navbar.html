@@ -1,12 +1,19 @@
 {% load static %}
 
+<div class="container">
+    <div class="logo d-flex align-items-start flex-column">
+        <a href="/"><img id="logo" src=""></a>
+    
+        <a href="/">
+            <h1 class="app-title">YourHome</h1>
+        </a>
+    </div> 
+    <div class="login-register d-flex align-items-end flex-column">
+        <p><a href="">Sign in</a></p>
+    </div>
+</div>
+
 <div class="navbar container">
-    <a href="/"><img id="logo" src=""></a>
-
-    <a href="/">
-        <h1 class="app-title">YourHome</h1>
-    </a>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,29 +22,49 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Find a House</a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find an Apartment</a>
+                    <a class="nav-link active" href="/">Find Your Property</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Find a Office
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Find a House
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">For Sale</a>
-                        <a class="dropdown-item" href="#">To Let</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sale a Property</a>
-                        <a class="dropdown-item" href="#">Let a Property</a>
-                        <a class="dropdown-item" href="#">Login/Register</a>
+                        <a class="dropdown-item" href="#">To Rent</a>
                     </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Find an Apartment
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">For Sale</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">To Rent</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Find an Office
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">For Sale</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">To Rent</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sell Your Property</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Let Your Property</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-    <p><a href="">Logout</a></p>
 </div>
