@@ -7,50 +7,54 @@
 <div class="container home-container">
 
     <h2>Find your Dream Home</h2>
-    <div class="property-filter">
+    <div class="property-filter p-3">
         <form method="get">
             <select name="advert_type">
                 {% for value, display in advert_type_choices %}
-                    <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
+                <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
                 {% endfor %}
             </select>
             <select name="property_type">
                 {% for value, display in property_type_choices %}
-                    <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
+                <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                 {% endfor %}
             </select>
             <label for="price_min">Min Price:</label>
             <input type="number" name="price_min" id="price_min" value="{{ filter_form.price.value.min }}">
             <label for="price_max">Max Price:</label>
             <input type="number" name="price_max" id="price_max" value="{{ filter_form.price.value.max }}">
-            
+
             <input type="submit" value="Filter">
             <a class="btn ml-auto mr-2" href="{% url 'home' %}"> Clear All </a>
             <input type="submit" value="Advanced Filter" formaction="{% url 'multiselect_filter' %}">
-            
-        
+
+
         </form>
 
     </div>
-    <div class="property-gallery">
-        {% for property in properties %}
-            <div>
-                <h2>{{ property.advert_type }}</h2>
-                <p>{{ property.property_type }}</p>
-                <p>{{ property.price }}</p>
+    <div class="row mx-md-n5">
+        <div class="property-gallery col px-md-5">
+            <div class="d-flex justify-content-around align-items-center p-3 border bg-light">
+                {% for property in properties %}
+                <div>
+                    <h2>{{ property.advert_type }}</h2>
+                    <p>{{ property.property_type }}</p>
+                    <p>{{ property.price }}</p>
+                </div>
+                {% empty %}
+                <p>No properties found.</p>
+
+                {% endfor %}
             </div>
-        {% empty %}
-            <p>No properties found.</p>
 
-        {% endfor %}
-
+        </div>
     </div>
 
 
 
 
+    
 
-  
 
 
 

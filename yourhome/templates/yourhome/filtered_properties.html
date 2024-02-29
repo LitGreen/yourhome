@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="filtered-properties container d-flex bd-highlight">
+    <div class="property-gallery">
+        {% for property in properties %}
+            <div>
+                <h2>{{ property.advert_type }}</h2>
+                <p>{{ property.property_type }}</p>
+                <p>{{ property.price }}</p>
+            </div>
+        {% empty %}
+            <p>No properties found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
