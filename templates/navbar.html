@@ -3,11 +3,11 @@
 <div class="container">
     <div class="logo d-flex align-items-start flex-column">
         <a href="/"><img id="logo" src=""></a>
-    
+
         <a href="/">
             <h1 class="app-title">YourHome</h1>
         </a>
-    </div> 
+    </div>
     <div class="login-register d-flex align-items-end flex-column">
         <p><a href="">Sign in</a></p>
     </div>
@@ -31,9 +31,9 @@
                         Find a House
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">For Sale</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'house' 'for-sale' %}">For Sale</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">To Rent</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'house' 'to-rent' %}">To Rent</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -42,9 +42,11 @@
                         Find an Apartment
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">For Sale</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'apartment' 'for-sale' %}">For
+                            Sale</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">To Rent</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'apartment' 'to-rent' %}">To
+                            Rent</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -53,9 +55,9 @@
                         Find an Office
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">For Sale</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'office' 'for-sale' %}">For Sale</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">To Rent</a>
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'office' 'to-rent' %}">To Rent</a>
                     </div>
                 </li>
                 <li class="nav-item">
