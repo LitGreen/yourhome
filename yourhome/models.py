@@ -20,7 +20,7 @@ User = get_user_model()
 class Property(TimeStampedUUIDModel):
     class AdvertType(models.TextChoices):
         FOR_SALE = "For Sale", _("For Sale")
-        FOR_RENT = "For Rent", _("For Rent")
+        TO_RENT = "To Rent", _("To Rent")
 
     class PropertyType(models.TextChoices):
         HOUSE = "House", _("House")
@@ -61,11 +61,34 @@ class Property(TimeStampedUUIDModel):
     plot_area = models.DecimalField(
         verbose_name=_("Plot Area(m^2)"), max_digits=8, decimal_places=2, default=0.0
     )
-    total_floors = models.IntegerField(verbose_name=_("Number of floors"), default=0)
-    bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
-    bathrooms = models.DecimalField(
-        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=2, default=1.0
-    )
+
+    class TotalFloors(models.TextChoices):
+        ZERO = "0", _("0")
+        ONE = "1", _("1")
+        TWO = "2", _("2")
+        THREE = "3", _("3")
+        FOUR = "4", _("4")
+        FIVE = "5", _("5")
+        FIVE_PLUS = "5+", _("5+")
+
+    class Bedrooms(models.TextChoices):
+        STUDIO = "Studio",  _("Studio")
+        ZERO = "0", _("0")
+        ONE = "1", _("1")
+        TWO = "2", _("2")
+        THREE = "3", _("3")
+        FOUR = "4", _("4")
+        FIVE = "5", _("5")
+        FIVE_PLUS = "5+", _("5+")
+
+    class Bathrooms(models.TextChoices):
+        ONE = "1", _("1")
+        TWO = "2", _("2")
+        THREE = "3", _("3")
+        FOUR = "4", _("4")
+        FIVE = "5", _("5")
+        FIVE_PLUS = "5+", _("5+")
+
     advert_type = models.CharField(
         verbose_name=_("Advert Type"),
         max_length=50,
@@ -78,6 +101,27 @@ class Property(TimeStampedUUIDModel):
         max_length=50,
         choices=PropertyType.choices,
         default=PropertyType.OTHER,
+    )
+
+    total_floors = models.CharField(
+        verbose_name=_("Total Floors"),
+        max_length=50,
+        choices=TotalFloors.choices,
+        default=TotalFloors.ZERO,
+    )
+
+    bedrooms = models.CharField(
+        verbose_name=_("Bedrooms"),
+        max_length=50,
+        choices=Bedrooms.choices,
+        default=Bedrooms.ONE,
+    )
+
+    bathrooms = models.CharField(
+        verbose_name=_("bathrooms"),
+        max_length=50,
+        choices=Bathrooms.choices,
+        default=Bathrooms.ONE,
     )
 
     cover_photo = models.ImageField(
@@ -112,7 +156,7 @@ class Property(TimeStampedUUIDModel):
         return self.title
 
     class Meta:
-        app_label = "yourhome"  # Add the app_label attribute
+        app_label = "yourhome" 
         verbose_name = "Property"
         verbose_name_plural = "Properties"
 
