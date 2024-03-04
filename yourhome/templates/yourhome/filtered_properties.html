@@ -4,21 +4,42 @@
 
 {% block content %}
 
-<form method="get">
-    {{ form.as_p }}
-    <input type="submit" value="Filter">
-</form>
+<div class="container form-container d-flex bd-highlight pb-3">
+    <form method="get">
+        <!-- <div class="form-row align-items-center"> -->
+        <div class="p-3 d-flex">
+            {{ form.as_p }}
+        </div>
 
-<div class="filtered-properties container d-flex bd-highlight">
+        <!-- </div> -->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+        <input type="submit" value="Filter">
+
+
+
+
+
+    </form>
+</div>
+
+
+
+<div class="filtered-properties container d-flex justify-content-around p-3 border bg-light">
     <div class="property-gallery">
         {% for property in properties %}
-            <div>
-                <h2>{{ property.advert_type }}</h2>
-                <p>{{ property.property_type }}</p>
-                <p>{{ property.price }}</p>
-            </div>
+        <div>
+            <h3>{{ property.advert_type }}</h3>
+            <p>{{ property.property_type }}</p>
+            <p>{{ property.price }}</p>
+        </div>
         {% empty %}
-            <p>No properties found.</p>
+        <p>No properties found.</p>
         {% endfor %}
     </div>
 </div>

@@ -42,12 +42,12 @@ def home(request):
 
     return render(request, 'yourhome/home.html', context)
 
+
+
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     advert_type = request.GET.get('advert_type')
     property_type = request.GET.get('property_type')
     form = MultiselectFilterForm(request.GET or None)
-    price_gt = request.GET.get('price_gt', '')
-    price_lt = request.GET.get('price_lt', '')
     queryset = Property.objects.all()
 
     advert_type_map = {
@@ -92,15 +92,22 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         initial_data['advert_type'] = advert_type
 
     form = MultiselectFilterForm(request.GET or initial_data)
+    filter_form = PropertyFilter(request.GET, queryset=queryset)
+
+    price_gt = request.GET.get('price_gt', '')
+    price_lt = request.GET.get('price_lt', '')
 
     if price_gt.isdigit() and price_lt.isdigit():
         if int(price_gt) <= int(price_lt):
             queryset = queryset.filter(price__gt=price_gt, price__lt=price_lt)
         else:
-            messages.error(request, 'Please enter a valid price.')
-
-    filter_form = PropertyFilter(request.GET, queryset=queryset)
-    properties = filter_form.qs
+            messages.error(request, 'Test Please enter a valid price.')
+            properties = Property.objects.none()  
+            
+    else:
+        filter_form = PropertyFilter(request.GET, queryset=queryset)
+        properties = filter_form.qs  
+        
   
 
     context = {
@@ -113,4 +120,4 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'price_lt': price_lt,
     }
 
-    return render(request, 'yourhome/multiselect_filter.html', context)
+    return render(request, 'yourhome/filtered_properties.html', context)
