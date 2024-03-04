@@ -1,20 +1,31 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
-
-<div class="multiselect-filter container">
-    {% if show_multiselect_form %}
-    <form method="POST" class="lmultiselect-filter-form form-inline d-grid gap-2 pb-4 pt-3" action="">
-      <div class="form-group">
-        {% csrf_token %}
-        <label>Advanced Filter:</label>
-      </div>
-
-      <input type="submit" type="button" id="submit-btn" class="submit-filter btn btn-primary btn-sm mt-3 mb-2" value="Filter" />
+<div class="multiselect_filter container">
+    <form method="GET" class="filter_form form form-inline pb-4 ps-4 pt-3" action="">
+        <div class="form-group">
+            {% for field in form %}
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" id="submit-btn" class="btn btn-sm btn-primary" value="Submit" />
+            <a class="btn ml-auto mr-2" href="{% url 'multiselect_filter' %}"> Clear All </a>
+        </div>
     </form>
-
-    {% endif %}
-
+    <div class="property-gallery">
+        {% for property in properties %}
+            <div>
+                <h2>{{ property.advert_type }}</h2>
+                <p>{{ property.property_type }}</p>
+                <p>{{ property.price }}</p>
+            </div>
+        {% empty %}
+            <p>No properties found.</p>
+    
+        {% endfor %}
 </div>
 
 
