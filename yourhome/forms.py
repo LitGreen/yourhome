@@ -3,12 +3,12 @@ from django import forms
 
 
 class MultiselectFilterForm(forms.ModelForm):
-
     price_gt = forms.IntegerField(min_value=0, required=False)
     price_lt = forms.IntegerField(min_value=0, required=False)
     total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, required=False)
-    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, required=False)
+    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, required=False)  
     bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, required=False)
+    
 
 
     class Meta:

@@ -11,6 +11,7 @@ def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     advert_type = request.GET.get('advert_type')
     property_type = request.GET.get('property_type')
+    form = MultiselectFilterForm(request.GET or None)
     price_min = request.GET.get('price_min', '')
     price_max = request.GET.get('price_max', '')
     queryset = Property.objects.all()
@@ -21,7 +22,7 @@ def home(request):
         queryset = queryset.filter(property_type=property_type)
     if price_min.isdigit() and price_max.isdigit():
         if int(price_min) <= int(price_max):
-            queryset = queryset.filter(price__gt=price_min, price__lt=price_max)
+            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
         else:
             messages.error(request, 'Please enter a valid price.')
             
@@ -32,6 +33,7 @@ def home(request):
 
 
     context = {
+        'form': form,
         'filter_form': filter_form,
         'properties': properties,
         'advert_type_choices': Property.AdvertType.choices,
@@ -47,8 +49,23 @@ def home(request):
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     advert_type = request.GET.get('advert_type')
     property_type = request.GET.get('property_type')
-    form = MultiselectFilterForm(request.GET or None)
+    total_floors = request.GET.getlist('total_floors')
+    total_floors = [int(floor) for floor in total_floors if floor.isdigit()]
+    bedrooms = request.GET.getlist('bedrooms')
+    bedrooms = [int(bedroom) for bedroom in bedrooms if bedroom.isdigit()]
+    bathrooms = request.GET.getlist('bathrooms')
+    bathrooms = [int(bathroom) for bathroom in bathrooms if bathroom.isdigit()]
+
     queryset = Property.objects.all()
+
+    if total_floors:
+        queryset = queryset.filter(total_floors__in=total_floors)
+    if bedrooms:
+        queryset = queryset.filter(bedrooms__in=bedrooms)
+    if bathrooms:
+        queryset = queryset.filter(bathrooms__in=bathrooms)
+
+    form = MultiselectFilterForm(request.GET or None)
 
     advert_type_map = {
         'to-rent': 'To Rent', 
@@ -91,22 +108,31 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     if advert_type:
         initial_data['advert_type'] = advert_type
 
+    
     form = MultiselectFilterForm(request.GET or initial_data)
     filter_form = PropertyFilter(request.GET, queryset=queryset)
+    
+    if request.GET:
+        form = MultiselectFilterForm(request.GET or initial_data)
+        filter_form = PropertyFilter(request.GET, queryset=queryset)
+    else:
+        form = MultiselectFilterForm(initial={'property_type': property_type, 'advert_type': advert_type})
+        filter_form = PropertyFilter(queryset=queryset)
+
+    properties = filter_form.qs
 
     price_gt = request.GET.get('price_gt', '')
     price_lt = request.GET.get('price_lt', '')
 
     if price_gt.isdigit() and price_lt.isdigit():
-        if int(price_gt) <= int(price_lt):
-            queryset = queryset.filter(price__gt=price_gt, price__lt=price_lt)
+        if int(price_gt) > int(price_lt):
+            messages.error(request, 'Minimum price should not be greater than maximum price.')
+            properties = Property.objects.none()
         else:
-            messages.error(request, 'Test Please enter a valid price.')
-            properties = Property.objects.none()  
-            
-    else:
-        filter_form = PropertyFilter(request.GET, queryset=queryset)
-        properties = filter_form.qs  
+            queryset = queryset.filter(price__gte=price_gt, price__lte=price_lt)
+            filter_form = PropertyFilter(request.GET, queryset=queryset)
+            properties = filter_form.qs
+
         
   
 
@@ -116,6 +142,9 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'properties': properties,
         'advert_type_choices': Property.AdvertType.choices,
         'property_type_choices': Property.PropertyType.choices,
+        'total_floors': total_floors,
+        'bedrooms': bedrooms,
+        'bathrooms': bathrooms,
         'price_gt':  price_gt,
         'price_lt': price_lt,
     }
