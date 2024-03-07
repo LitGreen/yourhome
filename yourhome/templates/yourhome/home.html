@@ -15,6 +15,7 @@
                 {% endfor %}
             </select>
             <select name="property_type">
+                <option value="" {% if not request.GET.property_type %}selected{% endif %}>Any</option>
                 {% for value, display in property_type_choices %}
                 <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                 {% endfor %}
@@ -26,46 +27,44 @@
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
             </ul>
             {% endif %}
 
             <input type="submit" value="Filter">
             <a class="btn ml-auto mr-2" href="{% url 'home' %}"> Clear All </a>
-            <input type="submit" value="Advanced Filter" formaction="{% url 'filtered_properties' form.advert_type.value form.property_type.value %}">
-        </form>
+            <input type="submit" value="Advanced Filter"
+                formaction="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
+            <div class="row justify-content-start mx-md-n5">
+                <div class="property-gallery col justify-content-start px-md-5">
+                    <div class="d-flex border bg-light">
+                        {% for property in properties %}
+                        <div class="p-4">
+                            <h2>{{ property.advert_type }}</h2>
+                            <p>{{ property.property_type }}</p>
+                            <p>{{ property.price }}</p>
+                            <p>{{ property.total_floors }}</p>
+                            <p>{{ property.bedrooms }}</p>
+                            <p>{{ property.bathrooms }}</p>
+                        </div>
+                        {% empty %}
+                        <p>No properties found.</p>
 
-    </div>
-    <div class="row justify-content-start mx-md-n5">
-        <div class="property-gallery col justify-content-start px-md-5">
-            <div class="d-flex border bg-light">
-                {% for property in properties %}
-                <div class="p-4">
-                    <h2>{{ property.advert_type }}</h2>
-                    <p>{{ property.property_type }}</p>
-                    <p>{{ property.price }}</p>
-                    <p>{{ property.total_floors }}</p>
-                    <p>{{ property.bedrooms }}</p>
-                    <p>{{ property.bathrooms }}</p>
+                        {% endfor %}
+                    </div>
+
                 </div>
-                {% empty %}
-                <p>No properties found.</p>
-
-                {% endfor %}
             </div>
 
-        </div>
+
+
+
+
+
+
+
+
     </div>
 
-
-
-
-    
-
-
-
-
-</div>
-
-{% endblock %}
+    {% endblock %}
