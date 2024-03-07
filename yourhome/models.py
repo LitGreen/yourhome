@@ -24,8 +24,9 @@ class Property(TimeStampedUUIDModel):
 
     class PropertyType(models.TextChoices):
         HOUSE = "House", _("House")
-        APARTMENT = "Apartment", _("Apartment")
+        FLAT = "Flat / Apartment", _("Flat / Apartment")
         OFFICE = "Office", _("Office")
+        BUNGALOW = "Bungalow", _("Bungalow")
         WAREHOUSE = "Warehouse", _("Warehouse")
         COMMERCIAL = "Commercial", _("Commercial")
         OTHER = "Other", _("Other")
@@ -63,7 +64,6 @@ class Property(TimeStampedUUIDModel):
     )
 
     class TotalFloors(models.TextChoices):
-        ZERO = "0", _("0")
         ONE = "1", _("1")
         TWO = "2", _("2")
         THREE = "3", _("3")
@@ -73,7 +73,6 @@ class Property(TimeStampedUUIDModel):
 
     class Bedrooms(models.TextChoices):
         STUDIO = "Studio",  _("Studio")
-        ZERO = "0", _("0")
         ONE = "1", _("1")
         TWO = "2", _("2")
         THREE = "3", _("3")
@@ -100,14 +99,14 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Property Type"),
         max_length=50,
         choices=PropertyType.choices,
-        default=PropertyType.OTHER,
+         default=PropertyType.HOUSE,
     )
 
     total_floors = models.CharField(
         verbose_name=_("Total Floors"),
         max_length=50,
         choices=TotalFloors.choices,
-        default=TotalFloors.ZERO,
+        default=TotalFloors.ONE,
     )
 
     bedrooms = models.CharField(

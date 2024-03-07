@@ -7,7 +7,7 @@ from .forms import MultiselectFilterForm
 
 
 
-def home(request):
+def home(request): 
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     advert_type = request.GET.get('advert_type')
     property_type = request.GET.get('property_type')
@@ -18,7 +18,7 @@ def home(request):
 
     if advert_type:
         queryset = queryset.filter(advert_type=advert_type)
-    if property_type:
+    if property_type and property_type != 'Any':
         queryset = queryset.filter(property_type=property_type)
     if price_min.isdigit() and price_max.isdigit():
         if int(price_min) <= int(price_max):
@@ -47,14 +47,31 @@ def home(request):
 
 
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
-    advert_type = request.GET.get('advert_type')
-    property_type = request.GET.get('property_type')
-    total_floors = request.GET.getlist('total_floors')
-    total_floors = [int(floor) for floor in total_floors if floor.isdigit()]
-    bedrooms = request.GET.getlist('bedrooms')
-    bedrooms = [int(bedroom) for bedroom in bedrooms if bedroom.isdigit()]
-    bathrooms = request.GET.getlist('bathrooms')
-    bathrooms = [int(bathroom) for bathroom in bathrooms if bathroom.isdigit()]
+    
+    property_type_map = {
+        'any': 'Any',
+        'house': 'House', 
+        'flat-apartment': 'Flat / Apartment', 
+        'office': 'Office', 
+        'bungalow': 'Bungalow',
+        'warehouse': 'Warehouse', 
+        'commercial': 'Commercial', 
+        'other': 'Other', 
+    }
+
+    advert_type_map = {
+        'for-sale': 'For Sale',
+        'to-rent': 'To Rent',
+    }
+
+    property_type = property_type_map.get(property_type_slug, request.GET.get('property_type'))
+    advert_type = advert_type_map.get(advert_type_slug, request.GET.get('advert_type'))
+
+    total_floors = [int(floor) for floor in request.GET.getlist('total_floors')]
+    bedrooms = [int(bedroom) for bedroom in request.GET.getlist('bedrooms')]
+    bathrooms = [int(bathroom) for bathroom in request.GET.getlist('bathrooms')]
+    price_gt = request.GET.get('price_gt', '')
+    price_lt = request.GET.get('price_lt', '')
 
     queryset = Property.objects.all()
 
@@ -64,82 +81,25 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         queryset = queryset.filter(bedrooms__in=bedrooms)
     if bathrooms:
         queryset = queryset.filter(bathrooms__in=bathrooms)
-
-    form = MultiselectFilterForm(request.GET or None)
-
-    advert_type_map = {
-        'to-rent': 'To Rent', 
-        'for-sale': 'For Sale', 
-    }
-
-    if advert_type_slug:
-        advert_type = advert_type_map.get(advert_type_slug)
-        if advert_type:
-            queryset = queryset.filter(advert_type=advert_type)
-
-    elif 'advert_type' in request.GET:
-        advert_type = request.GET.get('advert_type')
-        if advert_type:
-            queryset = queryset.filter(advert_type=advert_type)
-
-    property_type_map = {
-        'house': 'House', 
-        'apartment': 'Apartment', 
-        'office': 'Office', 
-        'warehouse': 'Warehouse', 
-        'commercial': 'Commercial', 
-        'other': 'Other', 
-    }
-
-    if property_type_slug:
-        property_type = property_type_map.get(property_type_slug)
-        if property_type:
-            queryset = queryset.filter(property_type=property_type)
-
-
-    elif 'property_type' in request.GET:
-        property_type = request.GET.get('property_type')
-        if property_type:
-            queryset = queryset.filter(property_type=property_type)
-
-    initial_data = {}
-    if property_type_slug:
-        initial_data['property_type'] = property_type
+    if property_type and property_type != 'Any':
+        queryset = queryset.filter(property_type=property_type)
     if advert_type:
-        initial_data['advert_type'] = advert_type
-
-    
-    form = MultiselectFilterForm(request.GET or initial_data)
-    filter_form = PropertyFilter(request.GET, queryset=queryset)
-    
-    if request.GET:
-        form = MultiselectFilterForm(request.GET or initial_data)
-        filter_form = PropertyFilter(request.GET, queryset=queryset)
-    else:
-        form = MultiselectFilterForm(initial={'property_type': property_type, 'advert_type': advert_type})
-        filter_form = PropertyFilter(queryset=queryset)
-
-    properties = filter_form.qs
-
-    price_gt = request.GET.get('price_gt', '')
-    price_lt = request.GET.get('price_lt', '')
-
+        queryset = queryset.filter(advert_type=advert_type)
     if price_gt.isdigit() and price_lt.isdigit():
         if int(price_gt) > int(price_lt):
             messages.error(request, 'Minimum price should not be greater than maximum price.')
-            properties = Property.objects.none()
+            queryset = Property.objects.none()
         else:
             queryset = queryset.filter(price__gte=price_gt, price__lte=price_lt)
-            filter_form = PropertyFilter(request.GET, queryset=queryset)
-            properties = filter_form.qs
 
-        
-  
+    form = MultiselectFilterForm(request.GET or {'property_type': property_type, 'advert_type': advert_type})
+    filter_form = PropertyFilter(request.GET, queryset=queryset)
+
 
     context = {
         'form': form,
         'filter_form': filter_form,
-        'properties': properties,
+        'properties': queryset,
         'advert_type_choices': Property.AdvertType.choices,
         'property_type_choices': Property.PropertyType.choices,
         'total_floors': total_floors,
