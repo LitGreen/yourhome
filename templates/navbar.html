@@ -26,7 +26,7 @@
                     <a class="nav-link active" href="/">Find Your Property</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Find a House
                     </a>
@@ -39,13 +39,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Find an Apartment
+                        Find a Flat
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'filtered_properties' 'apartment' 'for-sale' %}">For
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'Flat / Apartment'|slugify 'for-sale' %}">For
                             Sale</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'filtered_properties' 'apartment' 'to-rent' %}">To
+                        <a class="dropdown-item" href="{% url 'filtered_properties' 'Flat / Apartment'|slugify 'to-rent' %}">To
                             Rent</a>
                     </div>
                 </li>
@@ -61,10 +61,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sell Your Property</a>
+                    <a class="nav-link" href="#">Sale a Property</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Let Your Property</a>
+                    <a class="nav-link" href="#">Let a Property</a>
                 </li>
             </ul>
         </div>

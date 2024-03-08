@@ -4,22 +4,46 @@
 
 {% block content %}
 
-<form method="get">
-    {{ form.as_p }}
-    <input type="submit" value="Filter">
-</form>
-
-<div class="filtered-properties container d-flex bd-highlight">
-    <div class="property-gallery">
-        {% for property in properties %}
-            <div>
-                <h2>{{ property.advert_type }}</h2>
-                <p>{{ property.property_type }}</p>
-                <p>{{ property.price }}</p>
+<div class="container filtered_properies-container">
+    <div class="container form-container d-flex bd-highlight pb-3">
+        <form method="get">
+            <div class="col px-md-5">
+                <div class="p-3 d-flex">
+                    <input type="hidden" name="advert_type" value="{{ form.advert_type.value }}">
+                    <input type="hidden" name="property_type" value="{{ form.property_type.value }}">
+                    {{ form.as_p }}
+                </div>
+               
             </div>
-        {% empty %}
-            <p>No properties found.</p>
-        {% endfor %}
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+            <input type="submit" value="Advanced Filter"
+                formaction="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
+            <a class="btn ml-auto mr-2" href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}"> Clear All Filters </a>
+            </form>
+    </div>
+
+
+    <div class="row justify-content-start mx-md-n5">
+        <div class="property-gallery col justify-content-start px-md-5">
+            <div class="d-flex border bg-light">
+                {% for property in properties %}
+                <div class="p-4">
+                    <h3>{{ property.advert_type }}</h3>
+                    <p>{{ property.property_type }}</p>
+                    <p>{{ property.price }}</p>
+                </div>
+                {% empty %}
+                <p>No properties found.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
+
 {% endblock content %}
