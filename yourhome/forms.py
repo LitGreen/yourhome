@@ -2,14 +2,14 @@ from .models import Property
 from django import forms
 
 
-class MultiselectFilterForm(forms.ModelForm):
-
+class MultiselectFilterForm(forms.Form):
+    advert_type = forms.ChoiceField(choices=(Property.AdvertType.choices), required=False)
+    property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
     price_gt = forms.IntegerField(min_value=0, required=False)
     price_lt = forms.IntegerField(min_value=0, required=False)
-
-    class Meta:
-        model = Property
-        fields = ('advert_type', 'property_type', 'total_floors', 'bedrooms', 'bathrooms')
+    total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, required=False)
+    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, required=False)  
+    bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, required=False)
 
 
     def __init__(self, *args, **kwargs):
