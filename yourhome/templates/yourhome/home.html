@@ -16,8 +16,7 @@
                         <select class="form-select" id="floatingSelectGrid" name="advert_type">
                             {% for value, display in advert_type_choices %}
 
-                            <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{
-                                display }}</option>
+                            <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
                             {% endfor %}
                         </select>
                         <label for="floatingSelectGrid">Advert Type</label>
@@ -28,8 +27,7 @@
                         <select class="form-select" id="floatingSelectGrid" name="property_type">
                             {% for value, display in property_type_choices %}
 
-                            <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{
-                                display }}</option>
+                            <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                             {% endfor %}
                         </select>
                         <label for="floatingSelectGrid">Property Type</label>
