@@ -7,10 +7,9 @@ class MultiselectFilterForm(forms.Form):
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
     price_gt = forms.IntegerField(min_value=0, required=False)
     price_lt = forms.IntegerField(min_value=0, required=False)
-    total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, required=False)
-    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, required=False)  
-    bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, required=False)
-
+    total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, widget=forms.CheckboxSelectMultiple, required=False)
+    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
+    bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

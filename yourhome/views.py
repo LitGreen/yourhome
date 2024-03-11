@@ -67,9 +67,9 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     property_type = property_type_map.get(property_type_slug, request.GET.get('property_type'))
     advert_type = advert_type_map.get(advert_type_slug, request.GET.get('advert_type'))
 
-    total_floors = [int(floor) for floor in request.GET.getlist('total_floors')]
-    bedrooms = [int(bedroom) for bedroom in request.GET.getlist('bedrooms')]
-    bathrooms = [int(bathroom) for bathroom in request.GET.getlist('bathrooms')]
+    total_floors = request.GET.getlist('total_floors')
+    bedrooms = request.GET.getlist('bedrooms')
+    bathrooms = request.GET.getlist('bathrooms')
     price_gt = request.GET.get('price_gt', '')
     price_lt = request.GET.get('price_lt', '')
 
