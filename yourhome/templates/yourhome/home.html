@@ -6,65 +6,89 @@
 
 <div class="container home-container">
 
-    <h2>Find your Dream Home</h2>
-    <div class="property-filter p-3">
+    <h2 class="pt-2">Find your Dream Home</h2>
+    <div class="property-filter py-2 row">
         <form method="get">
-            <select name="advert_type">
-                {% for value, display in advert_type_choices %}
-                <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
-                {% endfor %}
-            </select>
-            <select name="property_type">
-                <option value="" {% if not request.GET.property_type %}selected{% endif %}>Any</option>
-                {% for value, display in property_type_choices %}
-                <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
-                {% endfor %}
-            </select>
-            <label for="price_min">Min Price:</label>
-            <input type="number" name="price_min" id="price_min" value="{{ filter_form.price.value.min }}">
-            <label for="price_max">Max Price:</label>
-            <input type="number" name="price_max" id="price_max" value="{{ filter_form.price.value.max }}">
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-            </ul>
-            {% endif %}
+            <div class="row g-4 pb-3">
+                <div class="col-sm" name="advert_type">
+                    <div class="form-floating">
 
-            <input type="submit" value="Filter">
-            <input type="submit" value="Advanced Filter"
-                formaction="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
-            <a class="btn ml-auto mr-2" href="{% url 'home' %}"> Clear All Filters</a>
-                <div class="row justify-content-start mx-md-n5">
-                <div class="property-gallery col justify-content-start px-md-5">
-                    <div class="d-flex border bg-light">
-                        {% for property in properties %}
-                        <div class="p-4">
-                            <h2>{{ property.advert_type }}</h2>
-                            <p>{{ property.property_type }}</p>
-                            <p>{{ property.price }}</p>
-                            <p>{{ property.total_floors }}</p>
-                            <p>{{ property.bedrooms }}</p>
-                            <p>{{ property.bathrooms }}</p>
-                        </div>
-                        {% empty %}
-                        <p>No properties found.</p>
+                        <select class="form-select" id="floatingSelectGrid" name="advert_type">
+                            {% for value, display in advert_type_choices %}
 
-                        {% endfor %}
+                            <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{
+                                display }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelectGrid">Advert Type</label>
                     </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelectGrid" name="property_type">
+                            {% for value, display in property_type_choices %}
 
+                            <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{
+                                display }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelectGrid">Property Type</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating">
+                        <input type="number" name="price_min" class="form-control" id="price_min"
+                            placeholder="Min Price" value="{{ filter_form.price.value.min }}">
+                        <label for="price_min">Min Price</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" name="price_max" id="price_max"
+                            placeholder="Max Price" value="{{ filter_form.price.value.max }}">
+                        <label for="price_max">Max Price</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <input type="submit" class="btn btn-info float-start px-5" value="Filter">
+                    <a class="float-end"
+                        href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
+                        Advanced Filter</a>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
+            <a class="float-end" href="{% url 'home' %}"> Reset Filters</a>
+        </form>
+    </div>
+    <div class="container bg-ligh">
+        <div class="row justify-content-start py-3 border bg-light">
+            {% for property in properties %}
+            <div class="col-sm-3 pb-3">
+                <div class="bg-body p-3">
+                    <h3>{{ property.advert_type }}</h3>
+                    <p>{{ property.property_type }}</p>
+                    <p>{{ property.price }}</p>
+                    <p>{{ property.total_floors }}</p>
+                    <p>{{ property.bedrooms }}</p>
+                    <p>{{ property.bathrooms }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="p-3">No properties found.</p>
+            {% endfor %}
+        </div>
     </div>
 
-    {% endblock %}
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}
