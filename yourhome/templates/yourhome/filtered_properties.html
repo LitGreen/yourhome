@@ -5,45 +5,64 @@
 {% block content %}
 
 <div class="container filtered_properies-container">
-    <div class="container form-container d-flex bd-highlight pb-3">
-        <form method="get">
-            <div class="col px-md-5">
-                <div class="p-3 d-flex">
-                    <input type="hidden" name="advert_type" value="{{ form.advert_type.value }}">
-                    <input type="hidden" name="property_type" value="{{ form.property_type.value }}">
-                    {{ form.as_p }}
-                </div>
-               
+    <div class="container">
+
+    <form class="row p-1" method="get">
+
+        {% for field in form %}
+        <div class="col-sm-3 d-flex pt-3">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="col">
+                {{ field }}
+
             </div>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-            </ul>
-            {% endif %}
-            <input type="submit" value="Advanced Filter"
+        </div>
+        {% endfor %}
+
+
+
+
+
+        {% if messages %}
+        <ul class="messages mx-2">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="buttons">
+            <input type="submit" class="btn btn-info btn-lg btn-block" value="Filter"
                 formaction="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
-            <a class="btn ml-auto mr-2" href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}"> Clear All Filters </a>
-            </form>
+            <a class="btn ml-auto d-flex justify-content-end"
+                href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
+                Reset </a>
+        </div>
+
+    </form>
     </div>
-
-
-    <div class="row justify-content-start mx-md-n5">
-        <div class="property-gallery col justify-content-start px-md-5">
-            <div class="d-flex border bg-light">
-                {% for property in properties %}
-                <div class="p-4">
+    <div class="container bg-light">
+        <div class="row justify-content-start py-3 border bg-light">
+            {% for property in properties %}
+            <div class="col-sm-3 pb-3">
+                <div class="bg-body p-3">
                     <h3>{{ property.advert_type }}</h3>
                     <p>{{ property.property_type }}</p>
                     <p>{{ property.price }}</p>
+                    <p>{{ property.total_floors }}</p>
+                    <p>{{ property.bedrooms }}</p>
+                    <p>{{ property.bathrooms }}</p>
                 </div>
-                {% empty %}
-                <p>No properties found.</p>
-                {% endfor %}
             </div>
+            {% empty %}
+            <p class="p-3">No properties found.</p>
+            {% endfor %}
         </div>
     </div>
+
 </div>
+
+
+
 
 {% endblock content %}
