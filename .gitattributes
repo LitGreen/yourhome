@@ -1,2 +1,0 @@
-home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.zip filter=lfs diff=lfs merge=lfs -text
-home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.txt filter=lfs diff=lfs merge=lfs -text
