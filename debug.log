@@ -3797,3 +3797,6 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such column: yourhome_property.country_id
 Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/backends/sqlite3/__init__.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
