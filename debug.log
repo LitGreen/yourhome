@@ -3800,3 +3800,882 @@ Watching for file changes with StatReloader
 /Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/backends/sqlite3/__init__.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+Downloading http://download.geonames.org/export/dump/cities15000.zip into /Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/cities_light/data/cities15000.zip
+Importing cities15000.zip
+Saving York
+Saving Yeovil
+Saving Yeadon
+Saving Yate
+Saving Yarm
+Saving Wrexham
+Saving Worthing
+Saving Worksop
+Saving Workington
+Saving Worcester Park
+Saving Worcester
+Saving Wood Green
+Saving Woodford Green
+Saving Wombwell
+Saving Wolverhampton
+Saving Wokingham
+Saving Woking
+Saving Witney
+Saving Witham
+Saving Wishaw
+Saving Wisbech
+Saving Winsford
+Saving Windsor
+Saving Winchester
+Saving Wilmslow
+Saving Willesden
+Saving Willenhall
+Saving Wigston Magna
+Saving Wigan
+Saving Widnes
+Saving Wickford
+Saving Whitstable
+Saving Whitley Bay
+Saving Whitehaven
+Saving Whitefield
+Saving Whickham
+Saving Weymouth
+Saving Weybridge
+Saving Weston-super-Mare
+Saving West Molesey
+Saving City of Westminster
+Saving Westhoughton
+Saving West Ham
+Saving Westbury
+Saving West Bromwich
+Saving West Bridgford
+Saving Wembley
+Saving Welwyn Garden City
+Saving Wellington
+Saving Wellingborough
+Saving Welling
+Saving Wednesfield
+Saving Wednesbury
+Saving Wath upon Dearne
+Saving Watford
+Saving Waterlooville
+Saving Washington
+Saving Warwick
+Saving Warrington
+Saving Warminster
+Saving Ware
+Saving Wantage
+Saving Walton-on-Thames
+Saving Walton-on-the-Naze
+Saving Walthamstow
+Saving Waltham Abbey
+Saving Walsall
+Saving Wallsend
+Saving Wallington
+Saving Wallasey
+Saving Walkden
+Saving Wakefield
+Saving Uxbridge
+Saving Urmston
+Saving Uckfield
+Saving Tynemouth
+Saving Tyldesley
+Saving Truro
+Saving Trowbridge
+Saving Totton
+Saving Totteridge
+Saving Tottenham
+Saving Torquay
+Saving Tonbridge
+Saving Tiverton
+Saving Tipton
+Saving Thorne
+Saving Thornaby-on-Tees
+Saving Thetford
+Saving Thatcham
+Saving Tewkesbury
+Saving Teignmouth
+Saving Taunton
+Saving Tamworth
+Saving Tadley
+Saving Swinton
+Saving Swindon
+Saving Swansea
+Saving Swanscombe
+Saving Swanley
+Saving Swadlincote
+Saving Sutton in Ashfield
+Saving Sutton Coldfield
+Saving Sutton
+Saving Sunderland
+Saving Sunbury-on-Thames
+Saving Sudbury
+Saving Stroud
+Saving Stretford
+Saving Streatham
+Saving Stratford-upon-Avon
+Saving Stratford
+Saving Stowmarket
+Saving Stourport-on-Severn
+Saving Stourbridge
+Saving Stoke-on-Trent
+Saving Stockton-on-Tees
+Saving Stockport
+Saving Stirling
+Saving Stevenage
+Saving Stepney
+Saving Staveley
+Saving Stanford-le-Hope
+Saving Stamford
+Saving Stalybridge
+Saving Staines
+Saving Stafford
+Saving Spennymoor
+Saving Spalding
+Saving South Shields
+Saving Southport
+Saving South Ockendon
+Saving South Hayling
+Saving Southend-on-Sea
+Saving South Elmsall
+Saving South Benfleet
+Saving Southampton
+Saving Southall
+Saving Solihull
+Saving Slough
+Saving Sleaford
+Saving Skelmersdale
+Saving Skegness
+Saving Sittingbourne
+Saving Shrewsbury
+Saving Shoreham-by-Sea
+Saving Shipley
+Saving Shepherds Bush
+Saving Sheffield
+Saving Sevenoaks
+Saving Selby
+Saving Seaham
+Saving Seaford
+Saving Scunthorpe
+Saving Scarborough
+Saving Sandown
+Saving Sandhurst
+Saving Sandbach
+Saving Saltash
+Saving Salisbury
+Saving Salford
+Saving Sale
+Saving Saint Peters
+Saving Saint Neots
+Saving St Helens
+Saving St Austell
+Saving Saint Andrews
+Saving St Albans
+Saving Saffron Walden
+Saving Ryton
+Saving Ryde
+Saving Rutherglen
+Saving Rushden
+Saving Runcorn
+Saving Ruislip
+Saving Rugeley
+Saving Rugby
+Saving Royton
+Saving Royston
+Saving Royal Tunbridge Wells
+Saving Rottingdean
+Saving Rotherham
+Saving Romsey
+Saving Romford
+Saving Rochford
+Saving Rochester
+Saving Rochdale
+Saving Risca
+Saving Ripon
+Saving Ripley
+Saving Richmond
+Saving Rhyl
+Saving Rhosllannerchrugog
+Saving Rhondda
+Saving Renfrew
+Saving Reigate
+Saving Redruth
+Saving Redhill
+Saving Redditch
+Saving Redcar
+Saving Reading
+Saving Rayleigh
+Saving Rawtenstall
+Saving Rawmarsh
+Saving Ramsgate
+Saving Ramsbottom
+Saving Purley
+Saving Pudsey
+Saving Prestwich
+Saving Preston
+Saving Prestatyn
+Saving Prescot
+Saving Poulton-le-Fylde
+Saving Potters Bar
+Saving Portsmouth
+Saving Portslade
+Saving Portishead
+Saving Porthcawl
+Saving Port Glasgow
+Saving Portadown
+Saving Poole
+Saving Pontypridd
+Saving Pontypool
+Saving Pontefract
+Saving Ponders End
+Saving Plymstock
+Saving Plymouth
+Saving Plumstead
+Saving Pitsea
+Saving Pinner
+Saving Peterlee
+Saving Peterhead
+Saving Peterborough
+Saving Perth
+Saving Penzance
+Saving Penrith
+Saving Penicuik
+Saving Penarth
+Saving Palmers Green
+Saving Paisley
+Saving Paignton
+Saving Oxford
+Saving Oswestry
+Saving Ossett
+Saving Orpington
+Saving Ormskirk
+Saving Omagh
+Saving Oldham
+Saving Oadby
+Saving Nuneaton
+Saving Nottingham
+Saving Norwich
+Saving Northwich
+Saving North Shields
+Saving Northolt
+Saving Lancing
+Saving Northampton
+Saving Northallerton
+Saving Newtownards
+Saving Newtownabbey
+Saving Newton Mearns
+Saving Newton-le-Willows
+Saving Newton Aycliffe
+Saving Newton Abbot
+Saving Newry
+Saving Newquay
+Saving Newport Pagnell
+Saving Newport
+Saving Newport
+Saving New Milton
+Saving New Mills
+Saving Newmarket
+Saving Newcastle upon Tyne
+Saving Newcastle under Lyme
+Saving Newbury
+Saving Newburn
+Saving Newark on Trent
+Saving Neston
+Saving Nelson
+Saving Neath
+Saving Nantwich
+Saving Nailsea
+Saving Musselburgh
+Saving Mountsorrel
+Saving Motherwell
+Saving Morley
+Saving Moreton
+Saving Morecambe
+Saving Morden
+Saving Mitcham
+Saving Mirfield
+Saving Milton Keynes
+Saving Middleton
+Saving Middlesbrough
+Saving Mexborough
+Saving Merthyr Tydfil
+Saving Melton Mowbray
+Saving Melksham
+Saving Meikle Earnock
+Saving Marple
+Saving Marlow
+Saving Market Harborough
+Saving Margate
+Saving March
+Saving Mansfield Woodhouse
+Saving Mansfield
+Saving Mangotsfield
+Saving Manchester
+Saving Maltby
+Saving Maldon
+Saving Maidstone
+Saving Maidenhead
+Saving Maghull
+Saving Maesteg
+Saving Macclesfield
+Saving Lymington
+Saving Luton
+Saving Lowestoft
+Saving Louth
+Saving Loughborough
+Saving Longfield
+Saving Long Eaton
+Saving Derry
+Saving London
+Saving Lofthouse
+Saving Llanelli
+Saving Llandudno
+Saving Livingston
+Saving Liverpool
+Saving Littlehampton
+Saving Litherland
+Saving Lisburn
+Saving Lincoln
+Saving Lichfield
+Saving Leyland
+Saving Lewes
+Saving Leighton Buzzard
+Saving Leigh
+Saving Leicester
+Saving Leek
+Saving Leeds
+Saving Leatherhead
+Saving Royal Leamington Spa
+Saving Larne
+Saving Larkhall
+Saving Lancaster
+Saving Kirkintilloch
+Saving Kirkcaldy
+Saving Kirkby in Ashfield
+Saving Kirkby
+Saving Kippax
+Saving Kingswood
+Saving Kingswinford
+Saving Kingston upon Hull
+Saving King's Lynn
+Saving Kilwinning
+Saving Kilmarnock
+Saving Kidsgrove
+Saving Kidlington
+Saving Kidderminster
+Saving Keynsham
+Saving Kettering
+Saving Kenilworth
+Saving Kendal
+Saving Kempston
+Saving Keighley
+Saving Johnstone
+Saving Jarrow
+Saving Islington
+Saving Isleworth
+Saving Irvine
+Saving Irlam
+Saving Ipswich
+Saving Inverness
+Saving Ilkeston
+Saving Ilford
+Saving Hythe
+Saving Hyde
+Saving Huyton
+Saving Huntingdon
+Saving Huddersfield
+Saving Hucknall
+Saving Hoyland Nether
+Saving Hove
+Saving Hounslow
+Saving Houghton-Le-Spring
+Saving Horwich
+Saving Horsham
+Saving Horsforth
+Saving Horley
+Saving Hook
+Saving Hoddesdon
+Saving Hitchin
+Saving Hindley
+Saving Hinckley
+Saving High Wycombe
+Saving Highbury
+Saving High Blantyre
+Saving Heysham
+Saving Heswall
+Saving Heston
+Saving Hertford
+Saving Herne Bay
+Saving Hereford
+Saving Hemel Hempstead
+Saving Hebburn
+Saving Heanor
+Saving Hazel Grove
+Saving Haywards Heath
+Saving Hayes
+Saving Hayes
+Saving Hayes, England, United Kingdom failed: IntegrityError('UNIQUE constraint failed: cities_light_city.region_id, cities_light_city.subregion_id, cities_light_city.name')
+Saving Haydock
+Saving Hawarden
+Saving Haverhill
+Saving Havant
+Saving Hatfield
+Saving Hastings
+Saving Haslingden
+Saving Harwich
+Saving Hartley
+Saving Hartlepool
+Saving Harrow
+Saving Harrogate
+Saving Harpenden
+Saving Harlow
+Saving Harlesden
+Saving Hanworth
+Saving Hampton
+Saving Hamilton
+Saving Halifax
+Saving Halesowen
+Saving Hailsham
+Saving Hadleigh
+Saving Guiseley
+Saving Guisborough
+Saving Guildford
+Saving Grove
+Saving Grimsby
+Saving Greenock
+Saving Greenford
+Saving Great Yarmouth
+Saving Great Wyrley
+Saving Great Sankey
+Saving Great Malvern
+Saving Grays
+Saving Gravesend
+Saving Grantham
+Saving Grangemouth
+Saving Gosport
+Saving Gosforth
+Saving Gorseinon
+Saving Goole
+Saving Golborne
+Saving Godalming
+Saving Gloucester
+Saving Glossop
+Saving Glenrothes
+Saving Glasgow
+Saving Gillingham
+Saving Gelligaer
+Saving Gateshead
+Saving Gainsborough
+Saving Fylde
+Saving Fulwood
+Saving Fulham
+Saving Frome
+Saving Frinton-on-Sea
+Saving Friern Barnet
+Saving Formby
+Saving Folkestone
+Saving Flint
+Saving Fleetwood
+Saving Fleet
+Saving Finchley
+Saving Feltham
+Saving Felling
+Saving Felixstowe
+Saving Faversham
+Saving Farnworth
+Saving Farnham
+Saving Farnborough
+Saving Fareham
+Saving Falmouth
+Saving Falkirk
+Saving Exmouth
+Saving Exeter
+Saving Evesham
+Saving Esher
+Saving Epsom
+Saving Enfield Lock
+Saving Enfield Town
+Saving Emsworth
+Saving Ely
+Saving Eltham
+Saving Ellesmere Port Town
+Saving Elland
+Saving Elgin
+Saving Egham
+Saving Edmonton
+Saving Edinburgh
+Saving Eccles
+Saving Ebbw Vale
+Saving Eastwood
+Saving Retford
+Saving East Molesey
+Saving Eastleigh
+Saving East Kilbride
+Saving East Grinstead
+Saving East Dereham
+Saving Eastbourne
+Saving Durham
+Saving Dunstable
+Saving Dunfermline
+Saving Dundee
+Saving Dumfries
+Saving Dumbarton
+Saving Dukinfield
+Saving Dudley
+Saving Droylsden
+Saving Dronfield
+Saving Droitwich
+Saving Dover
+Saving Dorking
+Saving Dorchester
+Saving Doncaster
+Saving Dinnington
+Saving Didcot
+Saving Dewsbury
+Saving Devizes
+Saving Derby
+Saving Denton
+Saving Deal
+Saving Daventry
+Saving Darwen
+Saving Darton
+Saving Dartford
+Saving Darlington
+Saving Dalserf
+Saving Dagenham
+Saving Cwmbran
+Saving Cumbernauld
+Saving Croydon
+Saving Crowthorne
+Saving Crowborough
+Saving Cricklewood
+Saving Crewe
+Saving Crawley
+Saving Cramlington
+Saving Cowley
+Saving Cowes
+Saving Coventry
+Saving Coulsdon
+Saving Corby
+Saving Consett
+Saving Conisbrough
+Saving Congleton
+Saving Colwyn Bay
+Saving Colne
+Saving Coleraine
+Saving Colchester
+Saving Coity
+Saving Cobham
+Saving Coatbridge
+Saving Coalville
+Saving Clydebank
+Saving Clydach
+Saving Clevedon
+Saving Cleethorpes
+Saving Cleckheaton
+Saving Clacton-on-Sea
+Saving Cirencester
+Saving Christchurch
+Saving Chorley
+Saving Chislehurst
+Saving Chipping Sodbury
+Saving Chippenham
+Saving Chingford
+Saving Chichester
+Saving Chester-le-Street
+Saving Chesterfield
+Saving Chester
+Saving Chessington
+Saving Cheshunt
+Saving Chesham
+Saving Chepstow
+Saving Cheltenham
+Saving Chelmsford
+Saving Cheadle Hulme
+Saving Chatham
+Saving Chapeltown
+Saving Chalfont Saint Peter
+Saving Catford
+Saving Caterham
+Saving Castlereagh
+Saving Castleford
+Saving Carterton
+Saving Carshalton
+Saving Carrickfergus
+Saving Carmarthen
+Saving Carlisle
+Saving Cardiff
+Saving Canterbury
+Saving Cannock
+Saving Cambuslang
+Saving Cambridge
+Saving Camborne
+Saving Camberley
+Saving Calne
+Saving Caerphilly
+Saving Buxton
+Saving Bushey
+Saving Bury St Edmunds
+Saving Bury
+Saving Burton upon Trent
+Saving Burntwood
+Saving Burnley
+Saving Burnham-on-Sea
+Saving Burgess Hill
+Saving Buckley
+Saving Brymbo
+Saving Broxburn
+Saving Brownhills
+Saving Brough
+Saving Bromsgrove
+Saving Broadstairs
+Saving Brixham
+Saving Briton Ferry
+Saving Bristol
+Saving Brighton
+Saving Brighouse
+Saving Brierley Hill
+Saving Bridlington
+Saving Bridgwater
+Saving Bridgend
+Saving Brentwood
+Saving Bredbury
+Saving Bramhall
+Saving Braintree
+Saving Bradford
+Saving Bracknell
+Saving Bournemouth
+Saving Boston
+Saving Borehamwood
+Saving Bootle
+Saving Bonnyrigg
+Saving Bolton
+Saving Bognor Regis
+Saving Blyth
+Saving Bloxwich
+Saving Bletchley
+Saving Blackpool
+Saving Blackburn
+Saving Bishopstoke
+Saving Bishops Stortford
+Saving Bishopbriggs
+Saving Bishop Auckland
+Saving Birmingham
+Saving Birkenhead
+Saving Bingley
+Saving Billingham
+Saving Billericay
+Saving Biggleswade
+Saving Bideford
+Saving Biddulph
+Saving Bicester
+Saving Bexley
+Saving Bexhill-on-Sea
+Saving Beverley
+Saving Berkhamsted
+Saving Bentley
+Saving Belper
+Saving Bellshill
+Saving Belfast
+Saving Bedworth
+Saving Bedlington
+Saving Bedford
+Saving Beckenham
+Saving Bebington
+Saving Bearsden
+Saving Batley
+Saving Bathgate
+Saving Bath
+Saving Basingstoke
+Saving Basildon
+Saving Basford
+Saving Barry
+Saving Barrow in Furness
+Saving Barrhead
+Saving Barnstaple
+Saving Barnsley
+Saving Barnet
+Saving Barnes
+Saving Barking
+Saving Banstead
+Saving Bangor
+Saving Bangor
+Saving Banbury
+Saving Banbridge
+Saving Ballymena
+Saving Baildon
+Saving Ayr
+Saving Aylesbury
+Saving Atherton
+Saving Ashton-under-Lyne
+Saving Ashton in Makerfield
+Saving Ashington
+Saving Ashford
+Saving Ashford
+Saving Ascot
+Saving Arnold
+Saving Arbroath
+Saving Antrim
+Saving Andover
+Saving Ampthill
+Saving Ammanford
+Saving Amersham
+Saving Altrincham
+Saving Alton
+Saving Alloa
+Saving Alfreton
+Saving Aldridge
+Saving Aldershot
+Saving Airdrie
+Saving Adwick le Street
+Saving Acton
+Saving Accrington
+Saving Abingdon
+Saving Aberystwyth
+Saving Abergele
+Saving Aberdeen
+Saving Aberdare
+Saving Crosby
+Saving Tonypandy
+Saving Blackwood
+Saving Neston
+Saving Camden Town
+Saving Telford
+Saving Craigavon
+Saving Yateley
+Saving Bowthorpe
+Saving Hedge End
+Saving Gerrards Cross
+Saving Erskine
+Saving Hale
+Saving Chalk Farm
+Saving Amersham on the Hill
+Saving Shadwell
+Saving South Croydon
+Saving Surbiton
+Saving Failsworth
+Saving Radcliffe
+Saving Ferndown
+Saving Earl Shilton
+Saving Bordon
+Saving Lytham St Annes
+Saving Hadley Wood
+Saving Muswell Hill
+Saving Chapel Allerton
+Saving Blackheath
+Saving Kempston Hardwick
+Saving Lower Earley
+Saving Bartley Green
+Saving Golders Green
+Saving Canvey Island
+Saving Earlsfield
+Saving Peacehaven
+Saving Letchworth Garden City
+Saving Stanley
+Saving Rossendale
+Saving Thornton-Cleveleys
+Saving Deeside
+Saving High Peak
+Saving Hayling Island
+Saving Isle of Lewis
+Saving Harringay
+Saving Canning Town
+Saving Manor Park
+Saving Thamesmead
+Saving Brockley
+Saving Blantyre
+Saving Vale of Leven
+Saving Viewpark
+Saving Burngreave
+Saving Archway
+Saving Sinfin
+Downloading http://download.geonames.org/export/dump/alternateNames.zip into /Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.zip
+Extracting alternateNames.txt from /Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.zip into /Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.txt
+Importing alternateNames.zip
+Importing parsed translation in the database
+Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/cities15000.zip
+Assuming local download is up to date for http://download.geonames.org/export/dump/alternateNames.zip
+Importing parsed translation in the database
+Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/cities15000.zip
+Assuming local download is up to date for http://download.geonames.org/export/dump/alternateNames.zip
+Importing parsed translation in the database
+Watching for file changes with StatReloader
+Assuming local download is up to date for http://download.geonames.org/export/dump/countryInfo.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin1CodesASCII.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/admin2Codes.txt
+Assuming local download is up to date for http://download.geonames.org/export/dump/cities15000.zip
+Assuming local download is up to date for http://download.geonames.org/export/dump/alternateNames.zip
+Importing parsed translation in the database
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /admin/yourhome/property/add/
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 44, in save
+    city_instance = City.objects.get(name=city, country=country)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+cities_light.models.City.DoesNotExist: City matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 715, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1944, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1803, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1850, in _changeform_view
+    new_object = self.save_form(request, form, change=not add)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1252, in save_form
+    return form.save(commit=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 48, in save
+    raise ValueError(f"City with name {city} in country {country} does not exist.")
+ValueError: City with name Aberdare, Wales, United Kingdom in country United Kingdom does not exist.
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader

@@ -33,6 +33,7 @@ class MultiselectFilterForm(forms.ModelForm):
         self.fields['bathrooms'].widget.attrs['class'] = 'multiselect'
         uk = Country.objects.get(name='United Kingdom')
         self.fields['country'].initial = uk
+        self.fields['city'].queryset = City.objects.filter(country=uk)
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -40,11 +41,12 @@ class MultiselectFilterForm(forms.ModelForm):
         country = self.cleaned_data.get('country')
         if city and country:
             try:
-                city_instance = City.objects.get(name=city, country=country)
+                city_name = city.name.split(',')[0].strip() 
+                city_instance = City.objects.get(name=city_name, country=country)
                 instance.city = city_instance
                 instance.country = country
             except ObjectDoesNotExist:
-                raise ValueError(f"City with name {city} in country {country} does not exist.")
+                raise ValueError(f"City with name {city_name} in country {country} does not exist.")
         elif not instance.country:
             uk = Country.objects.get(name='United Kingdom')
             instance.country = uk
