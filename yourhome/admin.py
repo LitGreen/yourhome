@@ -6,9 +6,8 @@ from .models import Property, Address
 from django.contrib.admin import SimpleListFilter
 
 
-@admin.register(Address)
-class AddressAdmin(admin.ModelAdmin):
-    pass
+# admin.site.register(Address)
+
 
 class PropertyAdmin(admin.ModelAdmin):
     form = MultiselectFilterForm

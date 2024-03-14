@@ -4679,3 +4679,13 @@ Traceback (most recent call last):
 ValueError: City with name Aberdare, Wales, United Kingdom in country United Kingdom does not exist.
 /Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
 Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/admin.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/admin.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/admin.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/admin.py changed, reloading.
+Watching for file changes with StatReloader
