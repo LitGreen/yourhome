@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from cities_light.models import Country, City
 from django.contrib.auth import get_user_model
 import random
 import string
@@ -16,6 +17,17 @@ class TimeStampedUUIDModel(models.Model):
 
 
 User = get_user_model()
+
+
+class Address(models.Model):
+    country = models.ForeignKey('cities_light.Country', on_delete=models.SET_NULL, null=True, blank=True) 
+    city = models.ForeignKey('cities_light.City', on_delete=models.SET_NULL, null=True, blank=True)
+
+
+class UKCountryDefault:
+    def __call__(self):
+        return Country.objects.get(name='United Kingdom')
+    
 
 class Property(TimeStampedUUIDModel):
     class AdvertType(models.TextChoices):
@@ -50,7 +62,12 @@ class Property(TimeStampedUUIDModel):
         default="Add description here...",
     )
 
-    city = models.CharField(verbose_name=_("City"), max_length=180)
+    # @staticmethod
+    # def get_uk_country():
+    #     return Country.objects.get(name='United Kingdom').pk
+
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='properties', null=True)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
     postcode = models.CharField(
         verbose_name=_("Postcode"), max_length=100, default="140"
     )
