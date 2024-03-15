@@ -7,10 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class MultiselectFilterForm(forms.ModelForm):
     advert_type = forms.ChoiceField(choices=(Property.AdvertType.choices), required=False)
-    city = forms.ModelChoiceField(
-        queryset=City.objects.none(),
-        required=False,
-    )
+    city = forms.ModelChoiceField(queryset=City.objects.none(), required=False,)
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
     price_gt = forms.IntegerField(min_value=0, required=False)
     price_lt = forms.IntegerField(min_value=0, required=False)

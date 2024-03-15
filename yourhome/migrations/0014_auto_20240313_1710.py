@@ -3,11 +3,7 @@
 from django.db import migrations
 
 
-def set_uk_country(apps, schema_editor):
-    Country = apps.get_model('cities_light', 'Country') 
-    Property = apps.get_model('yourhome', 'Property')
-    uk_country = Country.objects.get(name='United Kingdom')
-    Property.objects.update(country=uk_country)
+
 
 class Migration(migrations.Migration):
 
@@ -16,6 +12,4 @@ class Migration(migrations.Migration):
         ('yourhome', '0009_property_country'), 
     ]
 
-    operations = [
-        migrations.RunPython(set_uk_country),
-    ]
+    operations = []

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'yourhome',
     'django_filters',
     'rest_framework',
+    'cities_light',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,8 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 CITIES_LIGHT_COUNTRY_SOURCES = ['http://download.geonames.org/export/dump/countryInfo.txt']
+CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities500.zip']
+                              
 
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
 CITIES_LIGHT_INCLUDE_COUNTRIES = ['GB'] 
