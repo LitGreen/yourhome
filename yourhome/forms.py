@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-from .models import Property
-from django import forms
-
-
-class MultiselectFilterForm(forms.Form):
-    advert_type = forms.ChoiceField(choices=(Property.AdvertType.choices), required=False)
-=======
 from django import forms
 from django.db import IntegrityError
 from .models import Property, Address
@@ -19,20 +11,16 @@ class MultiselectFilterForm(forms.ModelForm):
         queryset=City.objects.none(),
         required=False,
     )
->>>>>>> 07958f67dab656a305249f065a314f57ff188827
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
     price_gt = forms.IntegerField(min_value=0, required=False)
     price_lt = forms.IntegerField(min_value=0, required=False)
     total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
-<<<<<<< HEAD
-=======
     
     class Meta:
         model = Property
         fields =  '__all__'
->>>>>>> 07958f67dab656a305249f065a314f57ff188827
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,10 +31,6 @@ class MultiselectFilterForm(forms.ModelForm):
         self.fields['total_floors'].widget.attrs['class'] = 'multiselect'
         self.fields['bedrooms'].widget.attrs['class'] = 'multiselect'
         self.fields['bathrooms'].widget.attrs['class'] = 'multiselect'
-<<<<<<< HEAD
-
-   
-=======
         uk = Country.objects.get(name='United Kingdom')
         self.fields['country'].initial = uk
         self.fields['city'].queryset = City.objects.filter(country=uk)
@@ -69,4 +53,3 @@ class MultiselectFilterForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
->>>>>>> 07958f67dab656a305249f065a314f57ff188827
