@@ -17,7 +17,7 @@ class MultiselectFilterForm(forms.ModelForm):
     
     class Meta:
         model = Property
-        fields =  '__all__'
+        fields = ['city', 'advert_type', 'property_type', 'price_gt', 'price_lt', 'total_floors', 'bedrooms', 'bathrooms']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,8 +29,18 @@ class MultiselectFilterForm(forms.ModelForm):
         self.fields['bedrooms'].widget.attrs['class'] = 'multiselect'
         self.fields['bathrooms'].widget.attrs['class'] = 'multiselect'
         uk = Country.objects.get(name='United Kingdom')
-        self.fields['country'].initial = uk
-        self.fields['city'].queryset = City.objects.filter(country=uk)
+        default_city = City.objects.filter(country=uk).first()
+        self.fields['city'].initial = default_city
+        self.fields['city'].queryset = City.objects.all()
+        
+        for name, field in self.fields.items():
+            if isinstance(field.widget, forms.CheckboxSelectMultiple):
+                field.widget.attrs['class'] = 'form-check-input'
+                field.widget.attrs['is_checkbox'] = True
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+        
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -50,3 +60,4 @@ class MultiselectFilterForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+    

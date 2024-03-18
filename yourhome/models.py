@@ -85,7 +85,6 @@ class Property(TimeStampedUUIDModel):
         TWO = "2", _("2")
         THREE = "3", _("3")
         FOUR = "4", _("4")
-        FIVE = "5", _("5")
         FIVE_PLUS = "5+", _("5+")
 
     class Bedrooms(models.TextChoices):
@@ -94,7 +93,6 @@ class Property(TimeStampedUUIDModel):
         TWO = "2", _("2")
         THREE = "3", _("3")
         FOUR = "4", _("4")
-        FIVE = "5", _("5")
         FIVE_PLUS = "5+", _("5+")
 
     class Bathrooms(models.TextChoices):
@@ -102,7 +100,6 @@ class Property(TimeStampedUUIDModel):
         TWO = "2", _("2")
         THREE = "3", _("3")
         FOUR = "4", _("4")
-        FIVE = "5", _("5")
         FIVE_PLUS = "5+", _("5+")
 
     advert_type = models.CharField(
