@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
@@ -10,27 +11,37 @@
     <div class="property-filter py-2 row">
         <form method="get">
             <div class="row g-4 pb-3">
+                <div class="form-floating">
+                    <select class="form-select" id="city" name="city">
+                        {% for city in cities %}
+                        <option value="{{ city.id }}" {% if city.id == request.GET.city %}selected{% endif %}>{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="city" class="ms-2">City</label>
+                </div>
+            </div>
+            <div class="row g-4 pb-3">
                 <div class="col-sm" name="advert_type">
                     <div class="form-floating">
 
-                        <select class="form-select" id="floatingSelectGrid" name="advert_type">
+                        <select class="form-select" id="advert_type" name="advert_type">
                             {% for value, display in advert_type_choices %}
 
                             <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
                             {% endfor %}
                         </select>
-                        <label for="floatingSelectGrid">Advert Type</label>
+                        <label for="advert_type">Advert Type</label>
                     </div>
                 </div>
                 <div class="col-sm">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid" name="property_type">
+                    <div class="form-floating">               
+                        <select class="form-select" id="property_type" name="property_type">
                             {% for value, display in property_type_choices %}
 
                             <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                             {% endfor %}
                         </select>
-                        <label for="floatingSelectGrid">Property Type</label>
+                        <label for="property_type">Property Type</label>
                     </div>
                 </div>
                 <div class="col-sm">
@@ -67,10 +78,13 @@
                 <div class="bg-body p-3">
                     <h3>{{ property.advert_type }}</h3>
                     <p>{{ property.property_type }}</p>
-                    <p>{{ property.price }}</p>
-                    <p>{{ property.total_floors }}</p>
-                    <p>{{ property.bedrooms }}</p>
-                    <p>{{ property.bathrooms }}</p>
+                    <p>{{ property.city }}</p>
+                    <p>£{{ property.price|intcomma }}</p>
+                    <p> 
+                        {{ property.total_floors }}
+                        {{ property.bedrooms }}
+                        {{ property.bathrooms }}
+                    </p>
                 </div>
             </div>
             {% empty %}
