@@ -23,6 +23,7 @@ def filter_properties(request, queryset, filters):
     return queryset
 
 def home(request): 
+    
     filters = {
         'city__id': request.GET.get('city'),
         'advert_type': request.GET.get('advert_type'),
@@ -30,6 +31,7 @@ def home(request):
         'price_min': request.GET.get('price_min', ''),
         'price_max': request.GET.get('price_max', ''),
     }
+
     queryset = Property.objects.all()
     queryset = filter_properties(request, queryset, filters)
     
@@ -51,7 +53,7 @@ def home(request):
 
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     property_type_map = {
-        'any': 'Any',
+        'any': None,
         'house': 'House', 
         'flat-apartment': 'Flat / Apartment', 
         'office': 'Office', 
@@ -71,16 +73,22 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'total_floors__in': request.GET.getlist('total_floors'),
         'bedrooms__in': request.GET.getlist('bedrooms'),
         'bathrooms__in': request.GET.getlist('bathrooms'),
-        'property_type': property_type_map.get(property_type_slug, request.GET.get('property_type')),
-        'advert_type': advert_type_map.get(advert_type_slug, request.GET.get('advert_type')),
         'price_min': request.GET.get('price_min', ''),
         'price_max': request.GET.get('price_max', ''),
     }
 
+    property_type = property_type_map.get(property_type_slug, request.GET.get('property_type'))
+    if property_type is not None and property_type != 'Any':
+        filters['property_type'] = property_type
+
+    advert_type = advert_type_map.get(advert_type_slug, request.GET.get('advert_type'))
+    if advert_type is not None and advert_type != 'Any':
+        filters['advert_type'] = advert_type
+
     queryset = Property.objects.all()
     queryset = filter_properties(request, queryset, filters)
 
-    form = MultiselectFilterForm(request.GET or {'property_type': filters['property_type'], 'advert_type': filters['advert_type']})
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
     filter_form = PropertyFilter(request.GET, queryset=queryset)
 
     context = {
@@ -90,11 +98,11 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'advert_type_choices': Property.AdvertType.choices,
         'property_type_choices': Property.PropertyType.choices,
         'cities': City.objects.all(),
-        'total_floors': filters['total_floors__in'],
-        'bedrooms': filters['bedrooms__in'],
-        'bathrooms': filters['bathrooms__in'],
-        'price_min':  filters['price_min'],
-        'price_max': filters['price_max'],
+        'total_floors': filters.get('total_floors__in'),
+        'bedrooms': filters.get('bedrooms__in'),
+        'bathrooms': filters.get('bathrooms__in'),
+        'price_min':  filters.get('price_min'),
+        'price_max': filters.get('price_max'),
     }
 
     return render(request, 'yourhome/filtered_properties.html', context)

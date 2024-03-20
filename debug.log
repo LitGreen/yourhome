@@ -13939,3 +13939,269 @@ Traceback (most recent call last):
   File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/template/base.py", line 698, in __init__
     raise TemplateSyntaxError(
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '==request.GET.property_type' from 'value==request.GET.property_type'
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/default_property_type/default_advert_type
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 87, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters['property_type'], 'advert_type': filters['advert_type']})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    uk = Country.objects.get(name='UK')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+cities_light.models.Country.DoesNotExist: Country matching query does not exist.
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 87, in multiselectFilter
+    queryset = queryset.filter(property_type=property_type)
+               ^^^^^^^^
+UnboundLocalError: cannot access local variable 'queryset' where it is not associated with a value
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ModelChoiceField' object has no attribute 'verbose_name'
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/flat-apartment/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ModelChoiceField' object has no attribute 'verbose_name'
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ModelChoiceField' object has no attribute 'verbose_name'
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'city'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].queryset.model._meta.get_field('city').verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: City has no field named 'city'
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'city'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 42, in home
+    'form': MultiselectFilterForm(request.GET or None),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].queryset.model._meta.get_field('city').verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: City has no field named 'city'
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'City / Town'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].queryset.model._meta.get_field('City / Town').verbose_name
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: City has no field named 'City / Town'
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = self.fields['city'].queryset.model._meta.get_field(name).verbose_name
+                                                                                   ^^^^
+UnboundLocalError: cannot access local variable 'name' where it is not associated with a value
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /filtered_properties/house/for-sale
+Traceback (most recent call last):
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/home-venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/views.py", line 91, in multiselectFilter
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/radoslavacherneva/yourhome/yourhome/forms.py", line 32, in __init__
+    self.fields['city'].label = _("City // Town")
+                                ^
+NameError: name '_' is not defined
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/forms.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/radoslavacherneva/yourhome/yourhome/models.py changed, reloading.
+Watching for file changes with StatReloader

@@ -1,8 +1,8 @@
 from django import forms
-from django.db import IntegrityError
-from .models import Property, Address
+from .models import Property
 from cities_light.models import Country, City
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext as _
 
 
 class MultiselectFilterForm(forms.ModelForm):
@@ -29,9 +29,8 @@ class MultiselectFilterForm(forms.ModelForm):
         self.fields['bedrooms'].widget.attrs['class'] = 'multiselect'
         self.fields['bathrooms'].widget.attrs['class'] = 'multiselect'
         uk = Country.objects.get(name='United Kingdom')
-        default_city = City.objects.filter(country=uk).first()
-        self.fields['city'].initial = default_city
-        self.fields['city'].queryset = City.objects.all()
+        self.fields['city'].queryset = City.objects.filter(country=uk)
+        self.fields['city'].label = _("City / Town")
         
         for name, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxSelectMultiple):
