@@ -31,27 +31,3 @@ class PropertyAdmin(admin.ModelAdmin):
     formatted_price.short_description = 'Price'
 
 admin.site.register(Property, PropertyAdmin)
-
-
-
-
-# class PropertyAdminForm(forms.ModelForm):
-#     class Meta:
-#         model = Property
-#         fields = '__all__'
-#         widgets = {
-#             'total_floors': forms.Select,
-#             'bedrooms': forms.Select,
-#             'bathrooms': forms.Select,
-#         }
-
-# class PropertyAdmin(admin.ModelAdmin):
-#     form = PropertyAdminForm
-#     list_display = ["title", "city", "advert_type", "property_type"]
-#     list_filter = ["advert_type", "property_type"]
-
-#     def get_city(self, obj):
-#         return obj.city.city if obj.address else None
-#     get_city.short_description = 'City'
-
-# admin.site.register(Property, PropertyAdmin)

@@ -43,11 +43,7 @@ class Property(TimeStampedUUIDModel):
         COMMERCIAL = "Commercial", _("Commercial")
         OTHER = "Other", _("Other")
 
-    # user = models.ForeignKey(
-    #     User,
-    #     verbose_name=_("Published by"),
-    #     on_delete=models.DO_NOTHING,
-    # )
+
 
     title = models.CharField(verbose_name=_("Property Title"), max_length=250)
     slug = models.SlugField(allow_unicode=True, default='slug')
@@ -62,9 +58,7 @@ class Property(TimeStampedUUIDModel):
         default="Add description here...",
     )
 
-    # @staticmethod
-    # def get_uk_country():
-    #     return Country.objects.get(name='United Kingdom').pk
+
 
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='properties', null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)

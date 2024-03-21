@@ -1,37 +1,36 @@
 from django import forms
-from django.db import IntegrityError
-from .models import Property, Address
+from .models import Property
 from cities_light.models import Country, City
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext as _
 
 
 class MultiselectFilterForm(forms.ModelForm):
     advert_type = forms.ChoiceField(choices=(Property.AdvertType.choices), required=False)
     city = forms.ModelChoiceField(queryset=City.objects.none(), required=False,)
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
-    price_gt = forms.IntegerField(min_value=0, required=False)
-    price_lt = forms.IntegerField(min_value=0, required=False)
+    price_min = forms.IntegerField(min_value=0, required=False)
+    price_max = forms.IntegerField(min_value=0, required=False)
     total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
     
     class Meta:
         model = Property
-        fields = ['city', 'advert_type', 'property_type', 'price_gt', 'price_lt', 'total_floors', 'bedrooms', 'bathrooms']
+        fields = ['city', 'advert_type', 'property_type', 'price_min', 'price_max', 'total_floors', 'bedrooms', 'bathrooms']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['advert_type'].widget.attrs['class'] = 'select'
         self.fields['property_type'].widget.attrs['class'] = 'select'
-        self.fields['price_gt'].widget.attrs['class'] = 'form-control'
-        self.fields['price_lt'].widget.attrs['class'] = 'form-control'
+        self.fields['price_min'].widget.attrs['class'] = 'form-control'
+        self.fields['price_max'].widget.attrs['class'] = 'form-control'
         self.fields['total_floors'].widget.attrs['class'] = 'multiselect'
         self.fields['bedrooms'].widget.attrs['class'] = 'multiselect'
         self.fields['bathrooms'].widget.attrs['class'] = 'multiselect'
         uk = Country.objects.get(name='United Kingdom')
-        default_city = City.objects.filter(country=uk).first()
-        self.fields['city'].initial = default_city
-        self.fields['city'].queryset = City.objects.all()
+        self.fields['city'].queryset = City.objects.filter(country=uk)
+        self.fields['city'].label = _("City / Town")
         
         for name, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxSelectMultiple):

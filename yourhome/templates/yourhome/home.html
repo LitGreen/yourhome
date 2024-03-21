@@ -17,7 +17,7 @@
                         <option value="{{ city.id }}" {% if city.id == request.GET.city %}selected{% endif %}>{{ city.name }}</option>
                         {% endfor %}
                     </select>
-                    <label for="city" class="ms-2">City</label>
+                    <label for="city" class="ms-2">City / Town</label>
                 </div>
             </div>
             <div class="row g-4 pb-3">
@@ -34,10 +34,9 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <div class="form-floating">               
+                    <div class="form-floating">
                         <select class="form-select" id="property_type" name="property_type">
                             {% for value, display in property_type_choices %}
-
                             <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                             {% endfor %}
                         </select>
@@ -58,8 +57,8 @@
                         <label for="price_max">Max Price</label>
                     </div>
                 </div>
-
             </div>
+
             <div class="row">
                 <div class="col-sm">
                     <input type="submit" class="btn btn-info float-start px-5" value="Filter">
@@ -69,29 +68,16 @@
                 </div>
             </div>
             <a class="float-end" href="{% url 'home' %}"> Reset Filters</a>
+            {% if messages %}
+            <ul class="messages text-danger ps-3 pt-1">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
         </form>
     </div>
-    <div class="container bg-ligh">
-        <div class="row justify-content-start py-3 border bg-light">
-            {% for property in properties %}
-            <div class="col-sm-3 pb-3">
-                <div class="bg-body p-3">
-                    <h3>{{ property.advert_type }}</h3>
-                    <p>{{ property.property_type }}</p>
-                    <p>{{ property.city }}</p>
-                    <p>£{{ property.price|intcomma }}</p>
-                    <p> 
-                        {{ property.total_floors }}
-                        {{ property.bedrooms }}
-                        {{ property.bathrooms }}
-                    </p>
-                </div>
-            </div>
-            {% empty %}
-            <p class="p-3">No properties found.</p>
-            {% endfor %}
-        </div>
-    </div>
+    {% include './properties_galery' %}
 
 
 

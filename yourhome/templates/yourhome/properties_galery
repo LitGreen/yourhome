@@ -1,0 +1,29 @@
+{% load static %}
+{% load humanize %}
+
+
+{% block content %}
+
+<div class="container bg-ligh">
+    <div class="row justify-content-start py-3 border bg-light">
+        {% for property in properties %}
+        <div class="col-sm-3 pb-3">
+            <div class="bg-body p-3">
+                <h3>{{ property.advert_type }}</h3>
+                <p>{{ property.property_type }}</p>
+                <p>{{ property.city }}</p>
+                <p>£{{ property.price|intcomma }}</p>
+                <p> 
+                    {{ property.total_floors }}
+                    {{ property.bedrooms }}
+                    {{ property.bathrooms }}
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="p-3">No properties found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

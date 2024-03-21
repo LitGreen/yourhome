@@ -1,61 +1,59 @@
 from django.shortcuts import render
-import django_filters
 from .models import Property
 from .filters import PropertyFilter
 from django.contrib import messages
 from .forms import MultiselectFilterForm
 from cities_light.models import City
 
+def filter_properties(request, queryset, filters):
+    price_min = filters.get('price_min', '')
+    price_max = filters.get('price_max', '')
+    
+    for filter_name, filter_value in filters.items():
+        if filter_value and filter_name not in ['price_min', 'price_max']:
+            queryset = queryset.filter(**{filter_name: filter_value})
 
+    if price_min.isdigit() and price_max.isdigit():
+        if int(price_min) > int(price_max):
+            messages.error(request, 'Please enter a valid price range.')
+            queryset = queryset.none()
+        else:
+            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
+    
+    return queryset
 
 def home(request): 
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-    advert_type = request.GET.get('advert_type')
-    property_type = request.GET.get('property_type')
-    cities = City.objects.all()
-    city_id = request.GET.get('city')
-    form = MultiselectFilterForm(request.GET or None)
-    price_min = request.GET.get('price_min', '')
-    price_max = request.GET.get('price_max', '')
-    queryset = Property.objects.all()
     
-    if city_id:
-        queryset = queryset.filter(city__id=city_id)
-    if advert_type:
-        queryset = queryset.filter(advert_type=advert_type)
-    if property_type and property_type != 'Any':
-        queryset = queryset.filter(property_type=property_type)
-    if price_min.isdigit() and price_max.isdigit():
-        if int(price_min) <= int(price_max):
-            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
-        else:
-            messages.error(request, 'Please enter a valid price.')
-            
+    filters = {
+        'city__id': request.GET.get('city'),
+        'advert_type': request.GET.get('advert_type'),
+        'property_type': request.GET.get('property_type') if request.GET.get('property_type') != 'Any' else None,
+        'price_min': request.GET.get('price_min', ''),
+        'price_max': request.GET.get('price_max', ''),
+    }
+
+    queryset = Property.objects.all()
+    queryset = filter_properties(request, queryset, filters)
     
     filter_form = PropertyFilter(request.GET, queryset=queryset)
     properties = filter_form.qs
 
-
-
     context = {
-        'form': form,
+        'form': MultiselectFilterForm(request.GET or None),
         'filter_form': filter_form,
         'properties': properties,
         'advert_type_choices': Property.AdvertType.choices,
         'property_type_choices': Property.PropertyType.choices,
-        'cities': cities,
-        'price_min': price_min,
-        'price_max': price_max,
+        'cities': City.objects.all(),
+        'price_min': filters['price_min'],
+        'price_max': filters['price_max'],
     }
 
     return render(request, 'yourhome/home.html', context)
 
-
-
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
-    
     property_type_map = {
-        'any': 'Any',
+        'any': None,
         'house': 'House', 
         'flat-apartment': 'Flat / Apartment', 
         'office': 'Office', 
@@ -70,41 +68,28 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'to-rent': 'To Rent',
     }
 
+    filters = {
+        'city__id': request.GET.get('city'),
+        'total_floors__in': request.GET.getlist('total_floors'),
+        'bedrooms__in': request.GET.getlist('bedrooms'),
+        'bathrooms__in': request.GET.getlist('bathrooms'),
+        'price_min': request.GET.get('price_min', ''),
+        'price_max': request.GET.get('price_max', ''),
+    }
+
     property_type = property_type_map.get(property_type_slug, request.GET.get('property_type'))
+    if property_type is not None and property_type != 'Any':
+        filters['property_type'] = property_type
+
     advert_type = advert_type_map.get(advert_type_slug, request.GET.get('advert_type'))
-    
-    cities = City.objects.all()
-    city_id = request.GET.get('city')
-    total_floors = request.GET.getlist('total_floors')
-    bedrooms = request.GET.getlist('bedrooms')
-    bathrooms = request.GET.getlist('bathrooms')
-    price_gt = request.GET.get('price_gt', '')
-    price_lt = request.GET.get('price_lt', '')
+    if advert_type is not None and advert_type != 'Any':
+        filters['advert_type'] = advert_type
 
     queryset = Property.objects.all()
-    
-    if city_id:
-        queryset = queryset.filter(city__id=city_id)
-    if total_floors:
-        queryset = queryset.filter(total_floors__in=total_floors)
-    if bedrooms:
-        queryset = queryset.filter(bedrooms__in=bedrooms)
-    if bathrooms:
-        queryset = queryset.filter(bathrooms__in=bathrooms)
-    if property_type and property_type != 'Any':
-        queryset = queryset.filter(property_type=property_type)
-    if advert_type:
-        queryset = queryset.filter(advert_type=advert_type)
-    if price_gt.isdigit() and price_lt.isdigit():
-        if int(price_gt) > int(price_lt):
-            messages.error(request, 'Minimum price should not be greater than maximum price.')
-            queryset = Property.objects.none()
-        else:
-            queryset = queryset.filter(price__gte=price_gt, price__lte=price_lt)
+    queryset = filter_properties(request, queryset, filters)
 
-    form = MultiselectFilterForm(request.GET or {'property_type': property_type, 'advert_type': advert_type})
+    form = MultiselectFilterForm(request.GET or {'property_type': filters.get('property_type'), 'advert_type': filters.get('advert_type')})
     filter_form = PropertyFilter(request.GET, queryset=queryset)
-
 
     context = {
         'form': form,
@@ -112,12 +97,12 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'properties': queryset,
         'advert_type_choices': Property.AdvertType.choices,
         'property_type_choices': Property.PropertyType.choices,
-        'cities': cities,
-        'total_floors': total_floors,
-        'bedrooms': bedrooms,
-        'bathrooms': bathrooms,
-        'price_gt':  price_gt,
-        'price_lt': price_lt,
+        'cities': City.objects.all(),
+        'total_floors': filters.get('total_floors__in'),
+        'bedrooms': filters.get('bedrooms__in'),
+        'bathrooms': filters.get('bathrooms__in'),
+        'price_min':  filters.get('price_min'),
+        'price_max': filters.get('price_max'),
     }
 
     return render(request, 'yourhome/filtered_properties.html', context)
