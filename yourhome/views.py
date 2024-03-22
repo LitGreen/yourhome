@@ -4,6 +4,8 @@ from .filters import PropertyFilter
 from django.contrib import messages
 from .forms import MultiselectFilterForm
 from cities_light.models import City
+from django.template.loader import render_to_string
+
 
 def filter_properties(request, queryset, filters):
     price_min = filters.get('price_min', '')
@@ -50,6 +52,7 @@ def home(request):
     }
 
     return render(request, 'yourhome/home.html', context)
+    
 
 def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     property_type_map = {
@@ -104,5 +107,7 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'price_min':  filters.get('price_min'),
         'price_max': filters.get('price_max'),
     }
-
+    
     return render(request, 'yourhome/filtered_properties.html', context)
+
+
