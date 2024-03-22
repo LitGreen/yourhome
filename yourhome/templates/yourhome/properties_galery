@@ -1,23 +1,31 @@
 {% load static %}
 {% load humanize %}
+{% load image_tags %}
 
 
 {% block content %}
 
-<div class="container bg-ligh">
-    <div class="row justify-content-start py-3 border bg-light">
+<div class="container">
+    <div class="row justify-content-start">
         {% for property in properties %}
-        <div class="col-sm-3 pb-3">
-            <div class="bg-body p-3">
-                <h3>{{ property.advert_type }}</h3>
-                <p>{{ property.property_type }}</p>
-                <p>{{ property.city }}</p>
-                <p>£{{ property.price|intcomma }}</p>
-                <p> 
-                    {{ property.total_floors }}
-                    {{ property.bedrooms }}
-                    {{ property.bathrooms }}
-                </p>
+        <div class="col-sm-3 py-3 border-bottom d-flex flex-column justify-content-between">
+            <div class="h-50">
+                {% if property.cover_photo|has_image %}
+                <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-3" style="max-height: 12rem;">
+                {% else %}
+                    <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="img-fluid rounded w-100 pb-3" style="max-height: 12rem;">
+                {% endif %}
+
+            </div>
+            
+            <div class="h-40">
+                <p class="mb-0">£{{ property.price|intcomma }}</p>
+                <p class="mb-0">{{ property.title }}</p>
+                <span>{{ property.city }}</span>  
+            </div>
+            
+            <div class="h-10">
+                <input type="submit" class="btn btn-warning btn-md btn-block" value="View all details"  href="">
             </div>
         </div>
         {% empty %}

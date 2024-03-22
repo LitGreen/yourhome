@@ -17,7 +17,7 @@ class MultiselectFilterForm(forms.ModelForm):
     
     class Meta:
         model = Property
-        fields = ['city', 'advert_type', 'property_type', 'price_min', 'price_max', 'total_floors', 'bedrooms', 'bathrooms']
+        fields = ['city', 'advert_type', 'property_type', 'total_floors', 'bedrooms', 'bathrooms']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
