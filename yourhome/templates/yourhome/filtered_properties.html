@@ -7,44 +7,42 @@
 
 <div class="container filtered_properies-container">
     <div class="form">
-
-        <form class="row" method="get">
-            {% for field in form %}
-            <div
-                class="{% if field.label == 'City' and 'Advert Type' %}col-sm-6{% else %}col-sm-4{% endif %} d-flex pt-3">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                <div class="col">
-                    {% if field.field.widget.attrs.is_checkbox %}
-                    {% for choice in field.field.choices %}
-                    <div class="form-check d-inline-flex">
-                        <input class="form-check-input" type="checkbox" name="{{ field.name }}"
-                            id="{{ field.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
-                        <label class="form-check-label" for="{{ field.auto_id }}_{{ forloop.counter0 }}">
-                            {{ choice.1 }}
-                        </label>
+        {{ form.media }}
+        <form method="get">
+            <div class="row container d-flex">
+                {% for field in form %}
+                <div class="d-flex pt-3">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <div class="col">
+                        {% if field.field.widget.attrs.is_checkbox %}
+                        {% for choice in field.field.choices %}
+                        <div class="form-check d-inline-flex">
+                            <input class="form-check-input" type="checkbox" name="{{ field.name }}"
+                                id="{{ field.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
+                            <label class="form-check-label" for="{{ field.auto_id }}_{{ forloop.counter0 }}">
+                                {{ choice.1 }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        {{ field }}
+                        {% endif %}
                     </div>
-                    {% endfor %}
-                    {% else %}
-                    {{ field }}
-                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-
-
-
-
-
-
-            <div class="buttons pt-3">
-                <input type="submit" class="btn btn-info btn-lg btn-block" value="Filter"
+            <div class="row no-gutters pt-3">
+                <input type="submit" class="btn btn-info btn-block" value="Filter"
                     formaction="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
-                <a class="btn ml-auto d-flex justify-content-end"
+
+            </div>
+            <div class="row no-gutters justify-content-end pt-2">
+                <a class=""
                     href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
                     Reset </a>
             </div>
             {% if messages %}
-            <ul class="messages text-danger mx-3">
+            <ul class="messages text-danger">
                 {% for message in messages %}
                 <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                     {% endfor %}

@@ -4,8 +4,7 @@ from .filters import PropertyFilter
 from django.contrib import messages
 from .forms import MultiselectFilterForm
 from cities_light.models import City
-from django.template.loader import render_to_string
-
+from dal import autocomplete
 
 def filter_properties(request, queryset, filters):
     price_min = filters.get('price_min', '')
@@ -24,8 +23,9 @@ def filter_properties(request, queryset, filters):
     
     return queryset
 
+
 def home(request): 
-    
+
     filters = {
         'city__id': request.GET.get('city'),
         'advert_type': request.GET.get('advert_type'),
@@ -110,4 +110,14 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     
     return render(request, 'yourhome/filtered_properties.html', context)
 
+
+class CityAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = City.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
+    
 

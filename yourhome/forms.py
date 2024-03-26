@@ -3,14 +3,19 @@ from .models import Property
 from cities_light.models import Country, City
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext as _
+from dal import autocomplete
+from django.shortcuts import get_object_or_404
 
 
 class MultiselectFilterForm(forms.ModelForm):
     advert_type = forms.ChoiceField(choices=(Property.AdvertType.choices), required=False)
-    city = forms.ModelChoiceField(queryset=City.objects.none(), required=False,)
+    city = forms.ModelChoiceField(
+        queryset=City.objects.all(),
+        widget=autocomplete.ModelSelect2(url='city-autocomplete', attrs={'data-placeholder': 'Enter a city or town name'}),
+    )
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
-    price_min = forms.IntegerField(min_value=0, required=False)
-    price_max = forms.IntegerField(min_value=0, required=False)
+    price_min = forms.IntegerField(min_value=0, required=False, widget=forms.NumberInput(attrs={'placeholder': 'Min Price'}))
+    price_max = forms.IntegerField(min_value=0, required=False, widget=forms.NumberInput(attrs={'placeholder': 'Max Price'}))
     total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
     bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
@@ -18,6 +23,10 @@ class MultiselectFilterForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = ['city', 'advert_type', 'property_type', 'total_floors', 'bedrooms', 'bathrooms']
+        
+    def clean_city(self):
+        city_name = self.cleaned_data.get('city')
+        city = City.objects.filter(name=city_name).first()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -59,4 +68,11 @@ class MultiselectFilterForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+    
+    
+    def form_valid(self, form):
+        city_name = form.cleaned_data.get('city')
+        city = get_object_or_404(City, name=city_name)
+        form.instance.city = city
+        return super().form_valid(form)
     

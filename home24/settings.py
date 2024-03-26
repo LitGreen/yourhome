@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'cities_light',
     'django.contrib.humanize',
+    'dal',
+    'dal_select2'
 ]
 
 MIDDLEWARE = [

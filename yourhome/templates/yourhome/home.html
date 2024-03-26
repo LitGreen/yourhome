@@ -8,71 +8,61 @@
 <div class="container home-container">
 
     <h2 class="pt-2">Find your Dream Home</h2>
-    <div class="property-filter py-2 row">
+    <div class="property-filter py-1">
         <form method="get">
-            <div class="row g-4 pb-3">
-                <div class="form-floating">
-                    <select class="form-select" id="city" name="city">
-                        {% for city in cities %}
-                        <option value="{{ city.id }}" {% if city.id == request.GET.city %}selected{% endif %}>{{ city.name }}</option>
+
+            <div class="row no-gutters g-4 pb-3">
+                {{ form.media }}
+                {{ form.city }}
+            </div>
+            <div class="row d-flex g-4 pb-3">
+                <div class="col-sm" name="advert_type">
+                    <label for="advert_type" class="">Advert Type</label>
+                    <select class="form-select" id="advert_type" name="advert_type">
+                        {% for value, display in advert_type_choices %}
+                        <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
                         {% endfor %}
                     </select>
-                    <label for="city" class="ms-2">City / Town</label>
+                </div>
+                <div class="col-sm">
+                    <label for="property_type">Property Type</label>
+                    <select class="form-select" id="property_type" name="property_type">
+                        {% for value, display in property_type_choices %}
+                        <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <input type="number" name="price_min" class="form-control" id="price_min" placeholder="Min Price"
+                        value="{{ filter_form.price.value.min }}">
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" name="price_max" id="price_max" placeholder="Max Price"
+                        value="{{ filter_form.price.value.max }}">
                 </div>
             </div>
-            <div class="row g-4 pb-3">
-                <div class="col-sm" name="advert_type">
-                    <div class="form-floating">
+            <div class="row no-gutters pb-2">
+                <input type="submit" class="btn btn-info btn-block" value="Filter">
 
-                        <select class="form-select" id="advert_type" name="advert_type">
-                            {% for value, display in advert_type_choices %}
-
-                            <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
-                            {% endfor %}
-                        </select>
-                        <label for="advert_type">Advert Type</label>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-floating">
-                        <select class="form-select" id="property_type" name="property_type">
-                            {% for value, display in property_type_choices %}
-                            <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
-                            {% endfor %}
-                        </select>
-                        <label for="property_type">Property Type</label>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-floating">
-                        <input type="number" name="price_min" class="form-control" id="price_min"
-                            placeholder="Min Price" value="{{ filter_form.price.value.min }}">
-                        <label for="price_min">Min Price</label>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" name="price_max" id="price_max"
-                            placeholder="Max Price" value="{{ filter_form.price.value.max }}">
-                        <label for="price_max">Max Price</label>
-                    </div>
-                </div>
             </div>
+            <div class="row justify-content-end">
+                <div class="col-sm-2 text-right">
 
-            <div class="row">
-                <div class="col-sm">
-                    <input type="submit" class="btn btn-info float-start px-5" value="Filter">
-                    <a class="float-end"
+                    <a class="ml-auto"
                         href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
-                        Advanced Filter</a>
+                        Advanced Filter</a><br>
+                    <a class="ml-auto" href="{% url 'home' %}"> Reset Filters</a>
                 </div>
+
+
+
             </div>
-            <a class="float-end" href="{% url 'home' %}"> Reset Filters</a>
+
             {% if messages %}
-            <ul class="messages text-danger ps-3 pt-1">
+            <ul class="messages text-danger">
                 {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
+                <li class="text-align" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
             </ul>
             {% endif %}
         </form>
@@ -88,5 +78,6 @@
 
 
 </div>
+
 
 {% endblock %}
