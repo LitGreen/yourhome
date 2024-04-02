@@ -2,6 +2,9 @@
 {% load humanize %}
 {% load image_tags %}
 
+<link href="{% static 'vendor/select2/select2.css' %}" type="text/css" media="all" rel="stylesheet" />
+<script src="{% static 'vendor/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'vendor/select2/select2.full.js' %}" type="text/javascript"></script>
 
 {% block content %}
 
@@ -9,27 +12,21 @@
     <div class="row justify-content-start">
         {% for property in properties %}
         <div class="col-sm-3 py-3 border-bottom d-flex flex-column justify-content-between">
-            <div class="h-50">
-                {% if property.cover_photo|has_image %}
-                <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-3" style="max-height: 12rem;">
-                {% else %}
-                    <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="img-fluid rounded w-100 pb-3" style="max-height: 12rem;">
-                {% endif %}
 
-            </div>
+           {% if property.cover_photo|has_image %}
+            <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">
+            {% else %}
+            <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">
+            {% endif %}
             
-            <div class="h-40">
-                <p class="mb-0">£{{ property.price|intcomma }}</p>
-                <p class="mb-0">{{ property.title }}</p>
-                <span>{{ property.city }}</span>  
-            </div>
-            
-            <div class="h-10">
-                <input type="submit" class="btn btn-warning btn-md btn-block" value="View all details"  href="">
-            </div>
+            <p class="mb-0">£{{ property.price|intcomma }}</p>
+            <p class="mb-0">{{ property.title }}</p>
+            <p class="mb-1">{{ property.city }}</p>  
+            <input type="submit" class="btn btn-warning btn-md btn-block" value="View all details"  href="">  
+
         </div>
         {% empty %}
-        <p class="p-3">No properties found.</p>
+        <p>No properties found.</p>
         {% endfor %}
     </div>
 </div>

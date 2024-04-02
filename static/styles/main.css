@@ -1,0 +1,35 @@
+/* main.css */
+
+.select2-container--default .select2-selection--single,
+#advert_type,
+#property_type {
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 39px !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+#advert_type, #property_type {
+    height: calc(1.5em + 0.75rem + 2px) !important;
+    line-height: 39px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+#advert_type,
+#property_type{
+    line-height: calc(1.5em + 0.75rem + 2px) !important;
+}
+
+#advert_type,
+#property_type {
+    min-width: 140px;
+}
+
+#property_type:first-of-type,
+#advert_type:first-of-type {
+    padding-left: 8px;
+    margin-left: 2px;
+}

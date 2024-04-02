@@ -1,18 +1,24 @@
+# import autocomplete_light.shortcuts as al
+# import every app/autocomplete_light_registry.py
+# al.autodiscover()
+
 from django.contrib import admin
 from .forms import MultiselectFilterForm
 from cities_light.models import Country, City
 from .models import Property, Address
 from django.contrib.humanize.templatetags.humanize import intcomma
+from dal import autocomplete
 
-from django.contrib.admin import SimpleListFilter
+admin.autodiscover()
 
 
 # admin.site.register(Address)
 
 
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ["title", "city", "advert_type", "property_type", 'formatted_price']
+    list_display = ["city", "title", "advert_type", "property_type", 'formatted_price']
     list_filter = ["advert_type", "property_type"]
+    autocomplete_fields = ["city"]
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
