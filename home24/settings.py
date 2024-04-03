@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'cities_light',
     'django.contrib.humanize',
     'dal',
-    'dal_select2'
+    'dal_select2',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

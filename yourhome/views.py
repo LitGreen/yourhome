@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Property
 from .filters import PropertyFilter
 from django.contrib import messages
-from .forms import MultiselectFilterForm
+from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm
 from cities_light.models import City
 from dal import autocomplete
+
 
 def filter_properties(request, queryset, filters):
     price_min = filters.get('price_min', '')
@@ -109,6 +110,28 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     }
     
     return render(request, 'yourhome/filtered_properties.html', context)
+
+
+def property_form(request, pk=None):
+    if pk:
+        property = Property.objects.get(pk=pk)
+        action = 'Update'
+    else:
+        property = Property()
+        action = 'List a'
+    if request.method == 'POST':
+        form = PropertyForm(request.POST, instance=property)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PropertyForm(instance=property)
+    return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'pk': pk})
+
+def property_view(request, pk):
+    property = get_object_or_404(Property, pk=pk)
+    form = PropertyViewForm(instance=property)
+    return render(request, 'yourhome/property_view.html', {'form': form})
 
 
 class CityAutocomplete(autocomplete.Select2QuerySetView):

@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% include 'dal_select2/includes.html' %}
+{% load image_tags %}
+
+
+{% block content %}
+
+<div class="container property_form">
+    <div class="form-group row py-2 container">
+        {% if property.cover_photo|has_image %}
+            <img src="{{ property.cover_photo.url }}" id="cover_photo_view" class="rounded pb-1">
+        {% else %}
+            <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="rounded pb-1">
+        {% endif %}
+    </div>
+    <div class="form-group row">
+        {% for field in form %}
+        <div class="col-sm-4 d-flex">
+            {% if 'photo' not in field.name and 'title' not in field.name %}
+                <label for="{{ field.id_for_label }}" class="pr-1">{{ field.label }}</label>
+            {% endif %}
+            {% if field.name == 'title' %}
+                <h5>{{ field.value }}</h5>
+            {% elif field.name == 'price' %}
+                <p>£{{ field.value|intcomma }}</p>
+            {% elif field.name != 'cover_photo' %}
+                <p>{{ field.value }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="buttons align-text-bottom d-flex align-items-end"> 
+        <input type="button" value="Back" class="btn btn-info align-text-bottom" onclick="history.back()">
+    </div>
+</div>
+
+
+{% endblock content %}

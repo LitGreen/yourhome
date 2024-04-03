@@ -2,9 +2,6 @@
 {% load humanize %}
 {% load image_tags %}
 
-<link href="{% static 'vendor/select2/select2.css' %}" type="text/css" media="all" rel="stylesheet" />
-<script src="{% static 'vendor/jquery/jquery.js' %}" type="text/javascript"></script>
-<script src="{% static 'vendor/select2/select2.full.js' %}" type="text/javascript"></script>
 
 {% block content %}
 
@@ -22,8 +19,8 @@
             <p class="mb-0">£{{ property.price|intcomma }}</p>
             <p class="mb-0">{{ property.title }}</p>
             <p class="mb-1">{{ property.city }}</p>  
-            <input type="submit" class="btn btn-warning btn-md btn-block" value="View all details"  href="">  
-
+            <a class="ml-auto" href="{% url 'property_form' property.pk %}"> Update</a>
+            <a class="btn btn-warning btn-md btn-block" href="{% url 'property_view' property.pk %}">View all details</a>
         </div>
         {% empty %}
         <p>No properties found.</p>
