@@ -1,10 +1,10 @@
 from django import forms
 from .models import Property
 from cities_light.models import Country, City
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext as _
 from dal import autocomplete
 from django.shortcuts import get_object_or_404
+from collections import OrderedDict
 
 
 class MultiselectFilterForm(forms.ModelForm):
@@ -12,6 +12,7 @@ class MultiselectFilterForm(forms.ModelForm):
     city = forms.ModelChoiceField(
         queryset=City.objects.all(),
         widget=autocomplete.ModelSelect2(url='city-autocomplete', attrs={'data-placeholder': 'Enter a city or town name'}),
+        required=False
     )
     property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
     price_min = forms.IntegerField(min_value=0, required=False, widget=forms.NumberInput(attrs={'placeholder': 'Min Price'}))
@@ -23,10 +24,10 @@ class MultiselectFilterForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = ['city', 'advert_type', 'property_type', 'total_floors', 'bedrooms', 'bathrooms']
-        
+         
     def clean_city(self):
-        city_name = self.cleaned_data.get('city')
-        city = City.objects.filter(name=city_name).first()
+        city = self.cleaned_data.get('city')
+        return city
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,15 +54,9 @@ class MultiselectFilterForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         city = self.cleaned_data.get('city')
-        country = self.cleaned_data.get('country')
-        if city and country:
-            try:
-                city_name = city.name.split(',')[0].strip() 
-                city_instance = City.objects.get(name=city_name, country=country)
-                instance.city = city_instance
-                instance.country = country
-            except ObjectDoesNotExist:
-                raise ValueError(f"City with name {city_name} in country {country} does not exist.")
+        if city:
+            instance.city = city
+            instance.country = city.country 
         elif not instance.country:
             uk = Country.objects.get(name='United Kingdom')
             instance.country = uk
@@ -76,3 +71,62 @@ class MultiselectFilterForm(forms.ModelForm):
         form.instance.city = city
         return super().form_valid(form)
     
+
+class PropertyForm(forms.ModelForm):
+    city = forms.ModelChoiceField(
+        queryset=City.objects.all(),
+        widget=autocomplete.ModelSelect2(url='city-autocomplete', attrs={'data-placeholder': 'Enter a city or town name'}),
+        required=False
+    )
+  
+    class Meta:
+        model = Property
+        exclude = [ 'slug', 'country' ]
+    
+    def clean_city(self):
+        city = self.cleaned_data.get('city')
+        return city
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        uk = Country.objects.get(name='United Kingdom')
+        self.fields['city'].queryset = City.objects.filter(country=uk)
+        self.fields['city'].label = _("City / Town")
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        city = self.cleaned_data.get('city')
+        if city:
+            instance.city = city
+            instance.country = city.country 
+        elif not instance.country:
+            uk = Country.objects.get(name='United Kingdom')
+            instance.country = uk
+        if commit:
+            instance.save()
+        return instance
+
+class PropertyViewForm(forms.ModelForm):
+    city = forms.CharField(disabled=True)
+
+    class Meta:
+        model = Property
+        exclude = ['slug', 'country', 'city', 'published_status', 'photo1', 'photo2', 'photo3', 'photo4']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.city:
+            self.fields['city'].initial = self.instance.city.name
+        if self.instance.description == "Add description here...":
+            self.fields['description'].initial = ""
+        self.fields['city'].label = "City / Town"
+        self.fields = OrderedDict([
+            ('cover_photo', self.fields['cover_photo']),
+            ('title', self.fields['title']),
+            ('city', self.fields['city']),
+        ] + [item for item in self.fields.items() if item[0] not in ['cover_photo', 'city']])
+        for field in self.fields.values():
+            if field.label:
+                field.label += ': '
+            field.disabled = True
+        

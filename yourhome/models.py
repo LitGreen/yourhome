@@ -47,21 +47,9 @@ class Property(TimeStampedUUIDModel):
 
     title = models.CharField(verbose_name=_("Property Title"), max_length=250)
     slug = models.SlugField(allow_unicode=True, default='slug')
-    ref_code = models.CharField(
-        verbose_name=_("Property Reference Code"),
-        max_length=255,
-        unique=True,
-        blank=True,
-    )
-    description = models.TextField(
-        verbose_name=_("Description"),
-        default="Add description here...",
-    )
-
-
-
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='properties', null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='properties', null=True)
+    
     postcode = models.CharField(
         verbose_name=_("Postcode"), max_length=100, default="140"
     )
@@ -70,9 +58,7 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Price")
     )
 
-    plot_area = models.DecimalField(
-        verbose_name=_("Plot Area(m^2)"), max_digits=8, decimal_places=2, default=0.0
-    )
+
 
     class TotalFloors(models.TextChoices):
         ONE = "1", _("1")
@@ -108,6 +94,10 @@ class Property(TimeStampedUUIDModel):
         max_length=50,
         choices=PropertyType.choices,
          default=PropertyType.HOUSE,
+    )
+
+    plot_area = models.DecimalField(
+        verbose_name=_("Plot Area(m^2)"), max_digits=8, decimal_places=2, default=0.0
     )
 
     total_floors = models.CharField(
@@ -157,7 +147,20 @@ class Property(TimeStampedUUIDModel):
     published_status = models.BooleanField(
         verbose_name=_("Published Status"), default=False
     )
+
+    ref_code = models.CharField(
+        verbose_name=_("Property Reference Code"),
+        max_length=255,
+        unique=True,
+        blank=True,
+    )
+
     views = models.IntegerField(verbose_name=_("Total Views"), default=0)
+
+    description = models.TextField(
+        verbose_name=_("Description"),
+        default="Add description here...",
+    )
 
     def __str__(self):
         return self.title

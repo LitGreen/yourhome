@@ -43,15 +43,15 @@
             </div>
             {% if messages %}
             <ul class="messages text-danger">
-                {% for message in messages %}
+                <!-- {% for message in messages %} -->
                 <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
+                    <!-- {% endfor %} -->
             </ul>
             {% endif %}
 
         </form>
     </div>
-    {% include './properties_galery' %}
+    {% include './properties_galery.html' %}
 </div>
 
 
