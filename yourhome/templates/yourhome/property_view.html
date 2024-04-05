@@ -9,6 +9,11 @@
 {% block content %}
 
 <div class="container property_form">
+    {% if property.pk %}
+    <div class="text-right">
+        <a class="btn btn-info mt-3" href="{% url 'property_form' property.pk %}">Update</a>
+    </div>
+    {% endif %}
     <div class="form-group row py-2 container">
         {% if property.cover_photo|has_image %}
             <img src="{{ property.cover_photo.url }}" id="cover_photo_view" class="rounded pb-1">
@@ -33,7 +38,11 @@
         {% endfor %}
     </div>
     <div class="buttons align-text-bottom d-flex align-items-end"> 
-        <input type="button" value="Back" class="btn btn-info align-text-bottom" onclick="history.back()">
+        <input type="button" value="Back" class="btn btn-outline-secondary align-text-bottom" onclick="history.back()">
+        <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
+        hx-target="#dialog" class="btn btn-danger">
+         Delete
+     </a>
     </div>
 </div>
 

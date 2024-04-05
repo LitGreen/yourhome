@@ -126,12 +126,23 @@ def property_form(request, pk=None):
             return redirect('home')
     else:
         form = PropertyForm(instance=property)
-    return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'pk': pk})
+    return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'property': property, 'pk': pk})
 
 def property_view(request, pk):
     property = get_object_or_404(Property, pk=pk)
     form = PropertyViewForm(instance=property)
-    return render(request, 'yourhome/property_view.html', {'form': form})
+    action = 'Update'
+    return render(request, 'yourhome/property_view.html', {'url': 'property_delete', 'form': form, 'action': action, 'property': property})
+
+def property_delete(request, pk):
+    property = get_object_or_404(Property, pk=pk)
+    if request.method == 'POST':
+        property.delete()
+        messages.success(request, 'Property deleted successfully.')
+        return redirect('home')
+    return render(request, 'yourhome/property_delete.html', {'property': property})
+
+
 
 
 class CityAutocomplete(autocomplete.Select2QuerySetView):
