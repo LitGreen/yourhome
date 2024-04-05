@@ -20,8 +20,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <script src="{% url 'admin:jsi18n' %}" type="text/javascript"></script>
     <!-- htmx -->
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
     <script src="https://unpkg.com/htmx.org@1.8.6" integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx" crossorigin="anonymous"></script>
-   
+    
 
 </head>
 
@@ -30,9 +31,51 @@
     {% include 'navbar.html' %}
 
 
+    <div id="modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="myModal" aria-hidden="true">
+        <div id="dialog" class="modal-dialog" data-bs-config={backdrop:true} hx-target="this">
+        </div>
+    </div>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.6"
+        integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'dialog.js'%}"></script>
+    <script>
+        document.body.addEventListener('htmx:afterOnLoad', function(event) {
+            var modalElement = document.getElementById('delete-modal');
+            var modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        });
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('delete-button').addEventListener('click', function(event) {
+                event.preventDefault();
+                var form = document.getElementById('delete-form');
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    window.location.href = 'yourhome/home.html';  
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            });
+        });
+    </script>
     {% block content %}
-
+    
     {% endblock %}
 
 </body>

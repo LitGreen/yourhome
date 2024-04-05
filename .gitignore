@@ -1,7 +1,12 @@
+home-venv/
+node_modules/
+staticfiles/
 home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.zip
 home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.txt
 home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.zip
 home-venv/lib/python3.11/site-packages/cities_light/data/alternateNames.txt
 alternateNames.txt
 alternateNames.zip
+alternateNames_split*
 *.pyc
+node_modules

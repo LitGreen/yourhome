@@ -10,4 +10,5 @@ urlpatterns = [
     path('property_form', views.property_form, name="property_form"),
     path('property_form/<uuid:pk>/', views.property_form, name='property_form'),
     path('property_view/<uuid:pk>/', views.property_view, name='property_view'),
+    path('property_delete/<uuid:pk>/', views.property_delete, name='property_delete'),
 ]

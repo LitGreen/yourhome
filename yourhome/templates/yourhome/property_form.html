@@ -27,8 +27,14 @@
         <div class="buttons align-text-bottom d-flex align-items-end">
             <button type="submit" class="btn btn-info align-text-bottom mb-2">{{ action }} Property</button>
             {% if not pk %}
-            <button type="submit" class="btn btn-dark align-text-bottom mx-3 mb-2">Save for Later</button>
+            <button type="submit" class="btn btn-outline-secondary align-text-bottom mx-3 mb-2">Save for Later</button>
             {% endif %}
+            {% if action == 'Update' %}
+            <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
+            hx-target="#dialog" class="btn btn-danger">
+                Delete
+            </a>
+        {% endif %}
         </div>
         
     </form>
