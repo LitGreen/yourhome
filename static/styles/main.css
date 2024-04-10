@@ -40,13 +40,14 @@
 }
 
 h1,
-h2 {
+h2,
+h3 {
     color: #B81761;
     font-family: sans-serif;
 
 }
 
-h3 {
+.app-title {
     font-family: "Gill Sans", sans-serif;
     color: black;
 

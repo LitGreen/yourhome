@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from cities_light.models import Country, City
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
 import random
 import string
 import uuid
@@ -15,8 +15,31 @@ class TimeStampedUUIDModel(models.Model):
     class Meta:
         abstract = True
 
+class User(AbstractUser):
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(unique=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    bio = models.TextField(null=True)
+    password = models.CharField(max_length=128, null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    avatar = models.ImageField(null=True, default="def.jpeg")
+    verification_code = models.CharField(max_length=4, null=True)
 
-User = get_user_model()
+    # Add related_name arguments
+    groups = models.ManyToManyField(
+        'auth.Group',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        related_name="yourhome_user_set",
+        related_query_name="user",
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        related_name="yourhome_user_set",
+        related_query_name="user",
+    )
 
 
 class Address(models.Model):

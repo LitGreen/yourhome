@@ -2,9 +2,55 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Property
 from .filters import PropertyFilter
 from django.contrib import messages
-from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.contrib.auth.decorators import login_required
+from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, RegistrationForm
 from cities_light.models import City
 from dal import autocomplete
+from django.contrib.auth import get_user_model
+
+
+
+User = get_user_model()
+
+def login_register(request):
+    show_login_form = request.GET.get('form') != 'register'
+    login_form = AuthenticationForm()
+    register_form = RegistrationForm()
+
+    if request.method == 'POST':
+        if 'login' in request.POST:
+            show_login_form = True
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                login(request, form.get_user())
+                return redirect('home')
+        elif 'register' in request.POST:
+            show_login_form = False
+            form = RegistrationForm(request.POST, request.FILES)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return redirect('two_factor:setup')
+            else:
+                for field in form:
+                    for error in field.errors:
+                        messages.error(request, f"{field.label}: {error}")
+                        
+    context = {
+        'show_login_form': show_login_form,
+        'register_form': register_form,
+        'login_form': login_form,
+    }
+    return render(request, 'yourhome/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+
+    return redirect('home')
 
 
 def filter_properties(request, queryset, filters):
@@ -77,7 +123,6 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
         'total_floors__in': request.GET.getlist('total_floors'),
         'bedrooms__in': request.GET.getlist('bedrooms'),
         'bathrooms__in': request.GET.getlist('bathrooms'),
-        'price_min': request.GET.get('price_min', ''),
         'price_max': request.GET.get('price_max', ''),
     }
 
@@ -126,23 +171,27 @@ def property_form(request, pk=None):
             return redirect('home')
     else:
         form = PropertyForm(instance=property)
+
     return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'property': property, 'pk': pk})
+
 
 def property_view(request, pk):
     property = get_object_or_404(Property, pk=pk)
     form = PropertyViewForm(instance=property)
     action = 'Update'
+
     return render(request, 'yourhome/property_view.html', {'url': 'property_delete', 'form': form, 'action': action, 'property': property})
+
 
 def property_delete(request, pk):
     property = get_object_or_404(Property, pk=pk)
+
     if request.method == 'POST':
         property.delete()
         messages.success(request, 'Property deleted successfully.')
         return redirect('home')
+    
     return render(request, 'yourhome/property_delete.html', {'property': property})
-
-
 
 
 class CityAutocomplete(autocomplete.Select2QuerySetView):
@@ -153,5 +202,7 @@ class CityAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__istartswith=self.q)
 
         return qs
+    
+
     
 
