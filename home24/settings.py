@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'widget_tweaks',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +60,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'two_factor.middleware.threadlocals.ThreadLocals',
+    'django_otp.middleware.OTPMiddleware',
 ]
 
+LOGIN_URL = 'accounts:login_register'
 ROOT_URLCONF = 'home24.urls'
 
 TEMPLATES = [

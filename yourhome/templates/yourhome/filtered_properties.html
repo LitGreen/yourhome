@@ -37,15 +37,14 @@
 
             </div>
             <div class="row no-gutters justify-content-end pt-2">
-                <a class=""
+                <a
                     href="{% url 'filtered_properties' property_type_slug='default_property_type' advert_type_slug='default_advert_type' %}">
-                    Reset </a>
+                    Reset 
+                </a>
             </div>
             {% if messages %}
             <ul class="messages text-danger">
-                <!-- {% for message in messages %} -->
                 <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    <!-- {% endfor %} -->
             </ul>
             {% endif %}
 

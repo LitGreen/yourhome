@@ -1,32 +1,19 @@
-"""
-URL configuration for home24 project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-import dal.autocomplete
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.i18n import JavaScriptCatalog
 
-
+from yourhome.views import login_register
+from yourhome import two_factor_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/jsi18n/', JavaScriptCatalog.as_view(), name='jsi18n'),
+    path('admin/jsi18n/', JavaScriptCatalog.as_view(), name='jsi18n'),
     path("", include("yourhome.urls")),
-
+    path('accounts/login_register/', login_register, name='login_register'),
+    path('accounts/', include((two_factor_urls, 'two_factor'), namespace='accounts')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

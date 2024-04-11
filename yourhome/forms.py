@@ -5,6 +5,28 @@ from django.utils.translation import gettext as _
 from dal import autocomplete
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
+
+class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    phone_number = forms.CharField(max_length=15, required=False)
+    bio = forms.CharField(widget=forms.Textarea, required=False)
+    avatar = forms.ImageField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'phone_number', 'bio', 'avatar', 'password1', 'password2')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
 
 
 class MultiselectFilterForm(forms.ModelForm):
