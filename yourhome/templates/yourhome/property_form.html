@@ -9,7 +9,7 @@
 
 <div class="container property_form pb-3">
     <h2 class="pt-2">{{ action }} Property</h2> 
-    <form method="post"  class="form-group row">
+    <form method="post"  enctype="multipart/form-data" class="form-group row">
         {% csrf_token %}
         {{ form.media }}
         {% for field in form %}

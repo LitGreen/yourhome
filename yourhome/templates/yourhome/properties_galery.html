@@ -10,7 +10,7 @@
         {% for property in properties %}
         <div class="col-sm-3 py-3 border-bottom d-flex flex-column justify-content-between">
 
-           {% if property.cover_photo|has_image %}
+            {% if property.cover_photo %}
             <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">
             {% else %}
             <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">

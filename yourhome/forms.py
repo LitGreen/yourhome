@@ -116,7 +116,7 @@ class PropertyForm(forms.ModelForm):
         self.fields['city'].label = _("City / Town")
 
     def save(self, commit=True):
-        instance = super().save(commit=False)
+        instance = super().save(commit=True)
         city = self.cleaned_data.get('city')
         if city:
             instance.city = city
@@ -124,8 +124,7 @@ class PropertyForm(forms.ModelForm):
         elif not instance.country:
             uk = Country.objects.get(name='United Kingdom')
             instance.country = uk
-        if commit:
-            instance.save()
+        instance.save() 
         return instance
 
 class PropertyViewForm(forms.ModelForm):

@@ -165,13 +165,12 @@ def property_form(request, pk=None):
         property = Property()
         action = 'List a'
     if request.method == 'POST':
-        form = PropertyForm(request.POST, instance=property)
+        form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
         form = PropertyForm(instance=property)
-
     return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'property': property, 'pk': pk})
 
 
@@ -180,8 +179,10 @@ def property_view(request, pk):
     form = PropertyViewForm(instance=property)
     action = 'Update'
 
-    return render(request, 'yourhome/property_view.html', {'url': 'property_delete', 'form': form, 'action': action, 'property': property})
+    if property.pk is None:
+        property.save()
 
+    return render(request, 'yourhome/property_view.html', {'url': 'property_delete', 'form': form, 'action': action, 'property': property})
 
 def property_delete(request, pk):
     property = get_object_or_404(Property, pk=pk)

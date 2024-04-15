@@ -145,7 +145,7 @@ class Property(TimeStampedUUIDModel):
     )
 
     cover_photo = models.ImageField(
-        verbose_name=_("Main Photo"), default="#", null=True, blank=True
+        verbose_name=_("Main Photo"), null=True, blank=True
     )
     photo1 = models.ImageField(
         default="",
