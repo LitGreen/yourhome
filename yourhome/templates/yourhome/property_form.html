@@ -24,7 +24,14 @@
             {% endfor %}
         </div>
         {% endfor %}
-        <div class="buttons align-text-bottom d-flex align-items-end my-2">
+        <div class="col-sm-4 d-flex pt-2">
+            <p>Listed by: {{ property.creator.username }}</p>
+        </div>
+        <div class="col-sm-4 pt-2">    
+            <p>Created: {{ property.created }}</p>
+            <p>Last updated: {{ property.updated }}</p>
+        </div>
+        <div class="col-sm-10 d-flex align-text-bottom align-items-end">
             <button type="submit" class="btn btn-info align-text-bottom">{{ action }} Property</button>
             {% if not pk %}
             <button type="submit" class="btn btn-outline-secondary align-text-bottom mx-3">Save for Later</button>
@@ -34,7 +41,12 @@
             hx-target="#dialog" class="btn btn-danger ml-3">
                 Delete
             </a>
-        {% endif %}
+            {% endif %}
+           
+            
+        </div>
+        <div class="col-sm-2 text-right">
+            <input type="button" value="Back" class="btn btn-outline-secondary align-text-end" onclick="history.back()">
         </div>
         
     </form>

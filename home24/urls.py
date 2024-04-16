@@ -14,6 +14,7 @@ urlpatterns = [
     path("", include("yourhome.urls")),
     path('accounts/login_register/', login_register, name='login_register'),
     path('accounts/', include((two_factor_urls, 'two_factor'), namespace='accounts')),
-]
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from cities_light.models import Country, City
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
 import random
 import string
 import uuid
@@ -71,7 +72,7 @@ class Property(TimeStampedUUIDModel):
     title = models.CharField(verbose_name=_("Property Title"), max_length=250)
     slug = models.SlugField(allow_unicode=True, default='slug')
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='properties', null=True)
+    city = models.ForeignKey(City, verbose_name=_("City / Town"), on_delete=models.CASCADE, related_name='properties', null=True)
     
     postcode = models.CharField(
         verbose_name=_("Postcode"), max_length=100, default="140"
@@ -184,6 +185,10 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Description"),
         default="Add description here...",
     )
+
+    creator = models.ForeignKey(get_user_model(), verbose_name=_("Listed by"), on_delete=models.CASCADE, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

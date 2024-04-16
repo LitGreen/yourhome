@@ -71,7 +71,7 @@ class MultiselectFilterForm(forms.ModelForm):
             else:
                 field.widget.attrs['class'] = 'form-control'
 
-        
+
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -103,7 +103,7 @@ class PropertyForm(forms.ModelForm):
   
     class Meta:
         model = Property
-        exclude = [ 'slug', 'country' ]
+        exclude = [ 'slug', 'country', 'creator' ]
     
     def clean_city(self):
         city = self.cleaned_data.get('city')
@@ -132,7 +132,11 @@ class PropertyViewForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        exclude = ['slug', 'country', 'city', 'published_status', 'photo1', 'photo2', 'photo3', 'photo4']
+        exclude = ['slug', 'country', 'city', 'published_status', 'creator', 'photo1', 'photo2', 'photo3', 'photo4']
+        widgets = {
+            'created': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'updated': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

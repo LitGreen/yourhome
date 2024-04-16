@@ -10,6 +10,7 @@ from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, Regist
 from cities_light.models import City
 from dal import autocomplete
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -157,7 +158,9 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     return render(request, 'yourhome/filtered_properties.html', context)
 
 
+@login_required
 def property_form(request, pk=None):
+    User = get_user_model()
     if pk:
         property = Property.objects.get(pk=pk)
         action = 'Update'
@@ -167,7 +170,10 @@ def property_form(request, pk=None):
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
-            form.save()
+            property = form.save(commit=False)
+            if not pk: 
+                property.creator = User.objects.get(id=request.user.id)
+            property.save()
             return redirect('home')
     else:
         form = PropertyForm(instance=property)

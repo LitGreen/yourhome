@@ -11,32 +11,32 @@
     <div class="property-filter py-1">
         <form method="get">
 
-            <div class="row no-gutters g-4 pb-3">
+            <div class="row no-gutters d-flex pb-3">
                 {{ form.media }}
                 {{ form.city }}
             </div>
-            <div class="row d-flex g-4 pb-3">
-                <div class="col-sm" name="advert_type">
-                    <label for="advert_type" class="">Advert Type</label>
+            <div class="row pb-3">
+                <div class="col-sm-3" name="advert_type">
+                    <label for="advert_type" class="pt-2 pr-1">Advert Type</label>
                     <select class="form-select" id="advert_type" name="advert_type">
                         {% for value, display in advert_type_choices %}
                         <option value="{{ value }}" {% if value == request.GET.advert_type %}selected{% endif %}>{{ display }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-sm">
-                    <label for="property_type">Property Type</label>
+                <div class="col-sm-4">
+                    <label for="property_type" class="pt-2 pr-1"></label>Property Type</label>
                     <select class="form-select" id="property_type" name="property_type">
                         {% for value, display in property_type_choices %}
                         <option value="{{ value }}" {% if value == request.GET.property_type %}selected{% endif %}>{{ display }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm-2">
                     <input type="number" name="price_min" class="form-control" id="price_min" placeholder="Min Price"
                         value="{{ filter_form.price.value.min }}">
                 </div>
-                <div class="col-sm">
+                <div class="col-sm-2">
                     <input type="number" class="form-control" name="price_max" id="price_max" placeholder="Max Price"
                         value="{{ filter_form.price.value.max }}">
                 </div>
