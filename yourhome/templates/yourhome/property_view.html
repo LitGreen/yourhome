@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="container property_form">
-    {% if property.pk %}
+    {% if property.pk and request.user == property.creator %}
     <div class="text-right">
         <a class="btn btn-info mt-3" href="{% url 'property_form' property.pk %}">Update</a>
     </div>
@@ -36,13 +36,24 @@
             {% endif %}
         </div>
         {% endfor %}
+        <div class="col-sm-4 d-flex">
+            <p>Listed by: {{ property.creator.username }}</p>
+        </div>
+        <div class="col-sm-4 d-flex">    
+            <p>Created: {{ property.created }}</p>
+        </div>
+        <div class="col-sm-4 d-flex">
+            <p>Last updated: {{ property.updated }}</p>
+        </div>    
     </div>
     <div class="buttons align-text-bottom d-flex align-items-end"> 
         <input type="button" value="Back" class="btn btn-outline-secondary align-text-bottom" onclick="history.back()">
+        {% if request.user == property.creator %}
         <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
         hx-target="#dialog" class="btn btn-danger ml-3">
          Delete
      </a>
+     {% endif %}
     </div>
 </div>
 

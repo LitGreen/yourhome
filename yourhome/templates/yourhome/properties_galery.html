@@ -19,7 +19,9 @@
             <p class="mb-0">£{{ property.price|intcomma }}</p>
             <p class="mb-0">{{ property.title }}</p>
             <p class="mb-1">{{ property.city }}</p>  
+            {% if property.pk and request.user == property.creator %}
             <a class="ml-auto" href="{% url 'property_form' property.pk %}"> Update</a>
+            {% endif %}
             <a class="btn btn-warning btn-md btn-block" href="{% url 'property_view' property.pk %}">View all details</a>          
         </div>
         {% empty %}
