@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .forms import MultiselectFilterForm
-from cities_light.models import Country, City
-from .models import Property, Address
-from django.contrib.humanize.templatetags.humanize import intcomma
-from dal import autocomplete
+from cities_light.models import Country
+from .models import Property, Avatar
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+
 
 admin.autodiscover()
 
@@ -54,3 +53,15 @@ class PropertyAdmin(admin.ModelAdmin):
     formatted_price.short_description = 'Price'
 
 admin.site.register(Property, PropertyAdmin)
+
+
+class AvatarInline(admin.StackedInline):
+    model = Avatar
+    can_delete = False
+    verbose_name = 'User profile picture'
+
+class UserAdmin(DefaultUserAdmin):
+    inlines = (AvatarInline, )
+
+admin.site.unregister(get_user_model())
+admin.site.register(get_user_model(), UserAdmin)

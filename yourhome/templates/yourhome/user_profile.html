@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load image_tags %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container pt-2">
+    <div class="row py-3" id="user-container">
+        <div class="col-3">
+
+            <div id='avatar' class="pb-2 pt-1">
+                {% if user.avatar.image %}
+                <img src="{{ user.avatar.image.url }}" id="user-avatar-view" class="rounded pb-1">
+                {% else %}
+                <img src="{% static 'images/default_user.png' %}" class="rounded pb-1">
+                {% endif %}
+            </div>
+            <p>Username: {{user.username}}</p>
+
+        </div>
+        <div class="col-9 mt-1">
+
+            {% if show_user_edit %}
+            <form method="post" class="form form-group" enctype="multipart/form-data" id="user-edit-form">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                {{ avatar_form.as_p }}
+                <ul class="messages text-danger">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                <button type="submit" class="btn btn-info mr-2">Save</button>
+                <input type="button" value="Back" class="btn btn-outline-secondary" onclick="history.back()">
+            </form>
+            {% else %}
+            <div class="user-view">
+                <div class="text-right pt-2" id="edit-delete-buttons">
+                    {% if request.user.id == user.id %}
+                    <a href="?form=edit" class="align-text-end">
+                        <img src="{% static 'images/pencil-fill.svg' %}">
+                    </a>
+                    <a type="button" class="align-text-end pl-3" data-bs-toggle="modal" hx-get="" hx-target="#dialog">
+                        <img id="delete-icon" src="{% static 'images/x-circle-fill.svg' %}">
+                    </a>
+                    {% endif %}
+
+                </div>
+                <p>Name: <span id="name-display">{{user.first_name}}</span></p>
+                <p>Email: <span id="email-display">{{user.email}}</span></p>
+                <p>Date joined: <small>{{user.date_joined}} </small></p>
+                <p>Last login: <small>{{user.last_login}}</small></p>
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+<h2 class="container">Active Properties from {{user.first_name}}</h2>
+{% include './properties_galery.html' with properties=properties %}
+
+{% endblock content %}

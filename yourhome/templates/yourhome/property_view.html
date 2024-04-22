@@ -16,7 +16,7 @@
     {% endif %}
     <div class="form-group row py-2 container">
         {% if property.cover_photo|has_image %}
-            <img src="{{ property.cover_photo.url }}" id="cover_photo_view" class="rounded pb-1">
+            <img src="{{ property.cover_photo.url }}" id="cover-photo-view" class="rounded pb-1">
         {% else %}
             <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="rounded pb-1">
         {% endif %}
@@ -37,7 +37,7 @@
         </div>
         {% endfor %}
         <div class="col-sm-4 d-flex">
-            <p>Listed by: {{ property.creator.username }}</p>
+            <p>Listed by: <a href="{% url 'user_profile' property.creator.id %}">{{ property.creator.username }}</a></p>
         </div>
         <div class="col-sm-4 d-flex">    
             <p>Created: {{ property.created }}</p>
@@ -46,7 +46,7 @@
             <p>Last updated: {{ property.updated }}</p>
         </div>    
     </div>
-    <div class="buttons align-text-bottom d-flex align-items-end"> 
+    <div class="buttons align-text-bottom d-flex align-items-end pb-4"> 
         <input type="button" value="Back" class="btn btn-outline-secondary align-text-bottom" onclick="history.back()">
         {% if request.user == property.creator %}
         <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
@@ -55,6 +55,8 @@
      </a>
      {% endif %}
     </div>
+    <h2 class="border-top py-3">Most Popular Properties</h2> 
+    {% include './properties_galery.html' with properties=properties %}
 </div>
 
 

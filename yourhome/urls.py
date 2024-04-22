@@ -14,6 +14,7 @@ urlpatterns = [
     path('property_view/<uuid:pk>/', views.property_view, name='property_view'),
     path('property_delete/<uuid:pk>/', views.property_delete, name='property_delete'),
     path('logout/', views.logoutUser, name="logout"),
+    path('user_profile/<str:pk>', views.user_profile, name="user_profile"),
 
 ]
 
