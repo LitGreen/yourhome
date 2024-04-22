@@ -1,12 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Property
+from django.urls import reverse
+from .models import Property, Avatar
 from .filters import PropertyFilter
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.contrib.auth.decorators import login_required
-from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, RegistrationForm
+from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, RegistrationForm, CustomUserChangeForm, AvatarForm
 from cities_light.models import City
 from dal import autocomplete
 from django.contrib.auth import get_user_model
@@ -39,13 +40,47 @@ def login_register(request):
                 for field in form:
                     for error in field.errors:
                         messages.error(request, f"{field.label}: {error}")
-                        
+
     context = {
         'show_login_form': show_login_form,
         'register_form': register_form,
         'login_form': login_form,
     }
+    
     return render(request, 'yourhome/login_register.html', context)
+
+
+def user_profile(request, pk):
+    User = get_user_model()
+    user = User.objects.get(pk=pk)
+    properties = Property.objects.filter(creator=user)
+    show_user_edit = request.GET.get('form') == 'edit'
+    form = CustomUserChangeForm(instance=user)
+    
+    avatar, created = Avatar.objects.get_or_create(user=user)
+    avatar_form = AvatarForm(request.POST, request.FILES, instance=avatar) if request.method == 'POST' else AvatarForm(instance=avatar)
+
+    if request.method == 'POST' and show_user_edit:
+        form = CustomUserChangeForm(request.POST, instance=user)
+        avatar_form = AvatarForm(request.POST, request.FILES, instance=avatar)
+        if form.is_valid() and avatar_form.is_valid():
+            form.save()
+            avatar_form.save() 
+            return redirect(reverse('user_profile', args=[user.pk]) + '?form=view')
+        else:
+            print(form.errors)
+            for field in form:
+                for error in field.errors:
+                    messages.error(request, f"{field.label}: {error}")
+
+    context = {
+        'user': user,
+        'form': form,
+        'avatar_form': avatar_form,
+        'show_user_edit': show_user_edit,
+        'properties': properties,
+    }
+    return render(request, 'yourhome/user_profile.html', context)
 
 
 def logoutUser(request):
@@ -177,18 +212,35 @@ def property_form(request, pk=None):
             return redirect('home')
     else:
         form = PropertyForm(instance=property)
-    return render(request, 'yourhome/property_form.html', {'form': form, 'action': action, 'property': property, 'pk': pk})
+
+    context = {
+        'form': form, 
+        'action': action,
+        'property': property,
+        'pk': pk
+    }
+
+    return render(request, 'yourhome/property_form.html', context)
 
 
 def property_view(request, pk):
     property = get_object_or_404(Property, pk=pk)
+    properties = Property.objects.all()
     form = PropertyViewForm(instance=property)
     action = 'Update'
 
     if property.pk is None:
         property.save()
 
-    return render(request, 'yourhome/property_view.html', {'url': 'property_delete', 'form': form, 'action': action, 'property': property})
+    context = {
+        'url': 'property_delete',
+        'form': form,
+        'action': action,
+        'property': property,
+         'properties': properties,
+    }
+
+    return render(request, 'yourhome/property_view.html', context)
 
 def property_delete(request, pk):
     property = get_object_or_404(Property, pk=pk)

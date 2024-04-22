@@ -1,27 +1,27 @@
 {% load static %}
 
 <div class="container">
-    <div class="logo d-flex align-items-start flex-column">
-        <a href="/"><img id="logo" src=""></a>
-
-        <a href="/">
-            <h3 class="app-title">YourHome</h3>
-        </a>
-    </div>
-    <div class="login-register d-flex align-items-end flex-column">
-        {% if request.user.is_authenticated %}
-            <p>Hello <a href="">{{ request.user }}</a></p>
-            {% if request.user.is_superuser %}
-                <p><a href="{% url 'admin:index' %}" class="button">Admin</a></p>
+    <div class="row ustify-content-between">
+        <div class="logo align-items-start col-10 pb-2">
+            <a href="/"><img id="logo" src="{% static 'images/yourHome_logo.png' %}"></a>
+    
+        </div>
+        <div class="login-register align-items-end col-2 pt-4">
+            {% if request.user.is_authenticated %}
+                <p>Hello <a href="{% url 'user_profile' user.id %}">{{ request.user }}</a></p>
+                {% if request.user.is_superuser %}
+                    <p><a href="{% url 'admin:index' %}" class="button">Admin</a></p>
+                {% endif %}
+                <p><a href="{% url 'logout' %}">Logout</a></p>
+            {% else %}
+                <p>
+                    <a href="{% url 'accounts:login_register' %}" class="button">Login</a> /
+                    <a href="{% url 'accounts:login_register' %}?form=register" class="button">Register</a>
+                </p>
             {% endif %}
-            <p><a href="{% url 'logout' %}">Logout</a></p>
-        {% else %}
-            <p>
-                <a href="{% url 'accounts:login_register' %}" class="button">Login</a> /
-                <a href="{% url 'accounts:login_register' %}?form=register" class="button">Register</a>
-            </p>
-        {% endif %}
+        </div>
     </div>
+ 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,12 +1,13 @@
 from django import forms
-from .models import Property
+from .models import Property, Avatar
 from cities_light.models import Country, City
 from django.utils.translation import gettext as _
 from dal import autocomplete
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
+
 
 
 User = get_user_model()
@@ -14,12 +15,11 @@ User = get_user_model()
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     phone_number = forms.CharField(max_length=15, required=False)
-    bio = forms.CharField(widget=forms.Textarea, required=False)
     avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'phone_number', 'bio', 'avatar', 'password1', 'password2')
+        fields = ('username', 'email', 'phone_number', 'avatar', 'password1', 'password2')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -27,6 +27,18 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('first_name', 'email')
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ('image',)
 
 
 class MultiselectFilterForm(forms.ModelForm):

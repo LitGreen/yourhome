@@ -1,5 +1,19 @@
 /* main.css */
 
+
+a #logo,
+#avatar img {
+    height: 10rem;
+    width: auto;
+
+}
+
+#avatar img {
+    height: 12rem;
+    width: auto;
+
+}
+
 .select2-container--default .select2-selection--single,
 #advert_type,
 #property_type {
@@ -50,5 +64,11 @@ h3 {
 .app-title {
     font-family: "Gill Sans", sans-serif;
     color: black;
+
+}
+
+#user-container {
+    height: 23rem;
+    margin: 0;
 
 }

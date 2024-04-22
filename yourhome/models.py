@@ -16,31 +16,10 @@ class TimeStampedUUIDModel(models.Model):
     class Meta:
         abstract = True
 
-class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(unique=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    bio = models.TextField(null=True)
-    password = models.CharField(max_length=128, null=True, blank=True)
-    is_verified = models.BooleanField(default=False)
-    avatar = models.ImageField(null=True, default="def.jpeg")
-    verification_code = models.CharField(max_length=4, null=True)
 
-    # Add related_name arguments
-    groups = models.ManyToManyField(
-        'auth.Group',
-        blank=True,
-        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
-        related_name="yourhome_user_set",
-        related_query_name="user",
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        blank=True,
-        help_text='Specific permissions for this user.',
-        related_name="yourhome_user_set",
-        related_query_name="user",
-    )
+class Avatar(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    image = models.ImageField( verbose_name=_("Profile Picture"), upload_to='static/images/avatars/', null=True, blank=True)
 
 
 class Address(models.Model):
@@ -146,7 +125,7 @@ class Property(TimeStampedUUIDModel):
     )
 
     cover_photo = models.ImageField(
-        verbose_name=_("Main Photo"), null=True, blank=True
+        verbose_name=_("Main Photo"), upload_to='static/images/properties/', null=True, blank=True
     )
     photo1 = models.ImageField(
         default="",
