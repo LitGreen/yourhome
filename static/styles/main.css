@@ -1,15 +1,10 @@
 /* main.css */
 
 
-a #logo,
-#avatar img {
-    height: 10rem;
-    width: auto;
-
-}
-
-#avatar img {
-    height: 12rem;
+#avatar img,
+#default-cover-photo,
+#cover-photo {
+    max-height: 12rem;
     width: auto;
 
 }

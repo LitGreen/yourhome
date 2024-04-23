@@ -11,6 +11,7 @@ from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, Regist
 from cities_light.models import City
 from dal import autocomplete
 from django.contrib.auth import get_user_model
+from django.apps import apps
 from django.contrib.auth.decorators import login_required
 
 
@@ -193,7 +194,7 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     return render(request, 'yourhome/filtered_properties.html', context)
 
 
-@login_required
+
 def property_form(request, pk=None):
     User = get_user_model()
     if pk:
@@ -208,7 +209,11 @@ def property_form(request, pk=None):
             property = form.save(commit=False)
             if not pk: 
                 property.creator = User.objects.get(id=request.user.id)
+                success_message = f'{property} created successfully.'
+            else:
+                success_message = f'{property} updated successfully.'
             property.save()
+            messages.success(request, success_message)
             return redirect('home')
     else:
         form = PropertyForm(instance=property)
@@ -242,15 +247,25 @@ def property_view(request, pk):
 
     return render(request, 'yourhome/property_view.html', context)
 
-def property_delete(request, pk):
-    property = get_object_or_404(Property, pk=pk)
+def delete_modal(request, model_name, pk):
+    if model_name.lower() == 'user':
+        Model = get_user_model()
+    else:
+        Model = apps.get_model('yourhome', model_name)
+
+    instance = get_object_or_404(Model, pk=pk)
 
     if request.method == 'POST':
-        property.delete()
-        messages.success(request, 'Property deleted successfully.')
+        instance.delete()
+        messages.success(request, f'{model_name} deleted successfully.')
         return redirect('home')
     
-    return render(request, 'yourhome/property_delete.html', {'property': property})
+    context = {
+        'model_name': model_name,
+        'instance': instance,
+    }
+    
+    return render(request, 'yourhome/delete_modal.html', context)
 
 
 class CityAutocomplete(autocomplete.Select2QuerySetView):

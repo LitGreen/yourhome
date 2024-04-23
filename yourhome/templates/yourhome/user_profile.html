@@ -42,8 +42,9 @@
                     <a href="?form=edit" class="align-text-end">
                         <img src="{% static 'images/pencil-fill.svg' %}">
                     </a>
-                    <a type="button" class="align-text-end pl-3" data-bs-toggle="modal" hx-get="" hx-target="#dialog">
-                        <img id="delete-icon" src="{% static 'images/x-circle-fill.svg' %}">
+                    <a type="button" data-bs-toggle="modal" hx-get="{% url 'delete_modal' 'user' user.pk %}"
+                    hx-target="#dialog" class="align-text-end pl-3">
+                      <img id="delete-icon" src="{% static 'images/x-circle-fill.svg' %}">
                     </a>
                     {% endif %}
 
