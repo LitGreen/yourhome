@@ -268,6 +268,11 @@ def delete_modal(request, model_name, pk):
     return render(request, 'yourhome/delete_modal.html', context)
 
 
+def images_gallery(request): 
+
+    return render(request, 'yourhome/images_gallery.html')
+
+
 class CityAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = City.objects.all()
@@ -276,6 +281,8 @@ class CityAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__istartswith=self.q)
 
         return qs
+    
+
     
 
     
