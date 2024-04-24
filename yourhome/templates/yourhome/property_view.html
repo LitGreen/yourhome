@@ -16,9 +16,9 @@
     {% endif %}
     <div class="form-group row py-2 container">
         {% if property.cover_photo|has_image %}
-            <img src="{{ property.cover_photo.url }}" id="cover-photo-view" class="rounded pb-1">
+            <img src="{{ property.cover_photo.url }}" id="cover-photo" class="rounded pb-1">
         {% else %}
-            <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="rounded pb-1">
+            <img src="{% static 'images/default_img.jpg' %}" id="default-cover-photo" class="rounded pb-1">
         {% endif %}
     </div>
     <div class="form-group row">
@@ -49,15 +49,15 @@
     <div class="buttons align-text-bottom d-flex align-items-end pb-4"> 
         <input type="button" value="Back" class="btn btn-outline-secondary align-text-bottom" onclick="history.back()">
         {% if request.user == property.creator %}
-        <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
+        <a type="button" data-bs-toggle="modal" hx-get="{% url 'delete_modal' 'property' property.pk  %}"
         hx-target="#dialog" class="btn btn-danger ml-3">
          Delete
      </a>
      {% endif %}
     </div>
     <h2 class="border-top py-3">Most Popular Properties</h2> 
-    {% include './properties_galery.html' with properties=properties %}
 </div>
 
+{% include './properties_galery.html' with properties=properties %}
 
 {% endblock content %}

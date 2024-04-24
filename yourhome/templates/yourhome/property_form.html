@@ -37,7 +37,7 @@
             <button type="submit" class="btn btn-outline-secondary align-text-bottom mx-3">Save for Later</button>
             {% endif %}
             {% if action == 'Update' %}
-            <a type="button" data-bs-toggle="modal" hx-get="{% url 'property_delete' property.pk  %}"
+            <a type="button" data-bs-toggle="modal" hx-get="{% url 'delete_modal' 'property' property.pk %}"
             hx-target="#dialog" class="btn btn-danger ml-3">
                 Delete
             </a>

@@ -11,18 +11,24 @@
         <div class="col-sm-3 py-3 border-bottom d-flex flex-column justify-content-between">
 
             {% if property.cover_photo %}
-            <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">
+            <a href="{% url 'property_view' property.pk %}">
+                <img src="{{ property.cover_photo.url }}" class="img-fluid rounded w-100 pb-1" id="cover-photo">
+            </a>
             {% else %}
-            <img src="{% static 'images/default_img.jpg' %}" alt="Default Image" class="img-fluid rounded w-100 pb-1" style="max-height: 12rem;">
+            <a href="{% url 'property_view' property.pk %}">
+                <img src="{% static 'images/default_img.jpg' %}" class="img-fluid rounded w-100 pb-1"
+                    id="default-cover-photo">
             {% endif %}
-            
+            </a>
             <p class="mb-0">£{{ property.price|intcomma }}</p>
             <p class="mb-0">{{ property.title }}</p>
-            <p class="mb-1">{{ property.city }}</p>  
+            <p class="mb-1">{{ property.city }}</p>
+
             {% if property.pk and request.user == property.creator %}
             <a class="ml-auto" href="{% url 'property_form' property.pk %}"> Update</a>
             {% endif %}
-            <a class="btn btn-warning btn-md btn-block" href="{% url 'property_view' property.pk %}">View all details</a>          
+            <a class="btn btn-warning btn-md btn-block" href="{% url 'property_view' property.pk %}">View all
+                details</a>
         </div>
         {% empty %}
         <p>No properties found.</p>
