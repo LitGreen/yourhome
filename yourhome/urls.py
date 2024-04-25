@@ -15,6 +15,7 @@ urlpatterns = [
     path('delete_modal/<str:model_name>/<path:pk>/', views.delete_modal, name='delete_modal'),
     path('logout/', views.logoutUser, name="logout"),
     path('user_profile/<str:pk>', views.user_profile, name="user_profile"),
+    path('images_gallery', views.images_gallery, name="images_gallery"),
 
 ]
 

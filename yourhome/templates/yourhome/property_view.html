@@ -8,23 +8,19 @@
 
 {% block content %}
 
+<div class="container images-gallery pt-5">
+    {% include './images_gallery.html' %}
+</div>
 <div class="container property_form">
     {% if property.pk and request.user == property.creator %}
     <div class="text-right">
         <a class="btn btn-info mt-3" href="{% url 'property_form' property.pk %}">Update</a>
     </div>
     {% endif %}
-    <div class="form-group row py-2 container">
-        {% if property.cover_photo|has_image %}
-            <img src="{{ property.cover_photo.url }}" id="cover-photo" class="rounded pb-1">
-        {% else %}
-            <img src="{% static 'images/default_img.jpg' %}" id="default-cover-photo" class="rounded pb-1">
-        {% endif %}
-    </div>
     <div class="form-group row">
         {% for field in form %}
         <div class="col-sm-4 d-flex">
-            {% if 'photo' not in field.name and 'title' not in field.name %}
+            {% if 'title' not in field.name and 'photo' not in field.name %}
                 <label for="{{ field.id_for_label }}" class="pr-1">{{ field.label }}</label>
             {% endif %}
             {% if field.name == 'title' %}
@@ -58,6 +54,6 @@
     <h2 class="border-top py-3">Most Popular Properties</h2> 
 </div>
 
-{% include './properties_galery.html' with properties=properties %}
+{% include './properties_gallery.html' with properties=properties %}
 
 {% endblock content %}
