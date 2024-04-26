@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 import random
 import string
 import uuid
+import os
  
 
 class TimeStampedUUIDModel(models.Model):
@@ -128,22 +129,26 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Main Photo"), upload_to='static/images/properties/', null=True, blank=True
     )
     photo1 = models.ImageField(
-        default="",
+        verbose_name=_("Photo 1"),
+        upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
     photo2 = models.ImageField(
-        default="",
+        verbose_name=_("Photo 2"),
+        upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
     photo3 = models.ImageField(
-        default="",
+        verbose_name=_("Photo 3"),
+        upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
     photo4 = models.ImageField(
-        default="",
+        verbose_name=_("Photo 4"),
+        upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
@@ -168,6 +173,10 @@ class Property(TimeStampedUUIDModel):
     creator = models.ForeignKey(get_user_model(), verbose_name=_("Listed by"), on_delete=models.CASCADE, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def cover_photo_filename(self):
+            return os.path.basename(self.cover_photo.file.name)
 
     def __str__(self):
         return self.title

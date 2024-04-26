@@ -8,15 +8,11 @@
 
 {% block content %}
 
-<div class="container images-gallery pt-5">
+<div class="container images-gallery py-5">
     {% include './images_gallery.html' %}
 </div>
 <div class="container property_form">
-    {% if property.pk and request.user == property.creator %}
-    <div class="text-right">
-        <a class="btn btn-info mt-3" href="{% url 'property_form' property.pk %}">Update</a>
-    </div>
-    {% endif %}
+    
     <div class="form-group row">
         {% for field in form %}
         <div class="col-sm-4 d-flex">
