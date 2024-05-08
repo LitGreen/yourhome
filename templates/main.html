@@ -77,6 +77,19 @@
             });
         });
     </script>
+
+    <script>
+        function switchStyle() {
+            if (document.getElementById('styleSwitch').checked) {
+                document.getElementById('gallery').classList.add("custom");
+                document.getElementById('galleryModal').classList.add("custom");
+            } else {
+                document.getElementById('gallery').classList.remove("custom");
+                document.getElementById('galleryModal').classList.remove("custom");
+            }
+        }
+    </script>
+
     {% block content %}
     
     {% endblock %}
