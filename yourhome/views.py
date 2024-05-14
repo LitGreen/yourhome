@@ -96,21 +96,13 @@ def logout_user(request):
 
 
 def filter_properties(request, queryset, filters):
-    price_min = filters.get('price_min', '')
-    price_max = filters.get('price_max', '')
-    
-    for filter_name, filter_value in filters.items():
-        if filter_value and filter_name not in ['price_min', 'price_max']:
-            queryset = queryset.filter(**{filter_name: filter_value})
+    property_filter = PropertyFilter(filters, queryset=queryset)
 
-    if price_min.isdigit() and price_max.isdigit():
-        if int(price_min) > int(price_max):
-            messages.error(request, 'Please enter a valid price range.')
-            queryset = queryset.none()
-        else:
-            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
-    
-    return queryset
+    if property_filter.is_valid():
+        return property_filter.qs
+    else:
+        messages.error(request, 'Please enter valid filters.')
+        return queryset.none()
 
 
 def home(request): 
