@@ -10,3 +10,8 @@ alternateNames.zip
 alternateNames_split*
 *.pyc
 node_modules
+__pycache__/
+*.sqlite3
+*.log
+.DS_Store
+GB.zip

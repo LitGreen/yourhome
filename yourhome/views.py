@@ -50,12 +50,17 @@ def login_register(request):
     
     return render(request, 'yourhome/login_register.html', context)
 
-
+@login_required
 def user_profile(request, pk):
     User = get_user_model()
     user = User.objects.get(pk=pk)
+
     properties = Property.objects.filter(creator=user)
     show_user_edit = request.GET.get('form') == 'edit'
+
+    if show_user_edit and request.user.id != user.id:
+        return redirect('home')
+
     form = CustomUserChangeForm(instance=user)
     
     avatar, created = Avatar.objects.get_or_create(user=user)
@@ -84,7 +89,7 @@ def user_profile(request, pk):
     return render(request, 'yourhome/user_profile.html', context)
 
 
-def logoutUser(request):
+def logout_user(request):
     logout(request)
 
     return redirect('home')
@@ -194,15 +199,19 @@ def multiselectFilter(request, advert_type_slug=None, property_type_slug=None):
     return render(request, 'yourhome/filtered_properties.html', context)
 
 
-
+@login_required
 def property_form(request, pk=None):
     User = get_user_model()
     if pk:
         property = Property.objects.get(pk=pk)
         action = 'Update'
+
+        if request.user.id != property.creator.id:
+            return redirect('home') 
     else:
         property = Property()
         action = 'List a'
+
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
@@ -228,11 +237,16 @@ def property_form(request, pk=None):
     return render(request, 'yourhome/property_form.html', context)
 
 
+@login_required
 def property_view(request, pk):
     property = get_object_or_404(Property, pk=pk)
     properties = Property.objects.all()
     form = PropertyViewForm(instance=property)
     action = 'Update'
+
+    if request.method == 'POST':
+        if request.user.id != property.creator.id:
+            return redirect('home')
 
     if property.pk is None:
         property.save()
@@ -247,6 +261,8 @@ def property_view(request, pk):
 
     return render(request, 'yourhome/property_view.html', context)
 
+
+@login_required
 def delete_modal(request, model_name, pk):
     if model_name.lower() == 'user':
         Model = get_user_model()
@@ -254,6 +270,11 @@ def delete_modal(request, model_name, pk):
         Model = apps.get_model('yourhome', model_name)
 
     instance = get_object_or_404(Model, pk=pk)
+
+    if hasattr(instance, 'creator') and request.user.id != instance.creator.id or \
+        hasattr(instance, 'id') and request.user.id != instance.id:
+        
+        return redirect('home')
 
     if request.method == 'POST':
         instance.delete()

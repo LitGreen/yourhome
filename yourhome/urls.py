@@ -13,7 +13,7 @@ urlpatterns = [
     path('property_form/<uuid:pk>/', views.property_form, name='property_form'),
     path('property_view/<uuid:pk>/', views.property_view, name='property_view'),
     path('delete_modal/<str:model_name>/<path:pk>/', views.delete_modal, name='delete_modal'),
-    path('logout/', views.logoutUser, name="logout"),
+    path('logout/', views.logout_user, name="logout"),
     path('user_profile/<str:pk>', views.user_profile, name="user_profile"),
     path('images_gallery', views.images_gallery, name="images_gallery"),
 
