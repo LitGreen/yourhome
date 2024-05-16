@@ -5,7 +5,6 @@ from .filters import PropertyFilter
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.contrib.auth.decorators import login_required
 from .forms import MultiselectFilterForm, PropertyForm, PropertyViewForm, RegistrationForm, CustomUserChangeForm, AvatarForm
 from cities_light.models import City
@@ -50,7 +49,7 @@ def login_register(request):
     
     return render(request, 'yourhome/login_register.html', context)
 
-@login_required
+
 def user_profile(request, pk):
     User = get_user_model()
     user = User.objects.get(pk=pk)
@@ -86,6 +85,7 @@ def user_profile(request, pk):
         'show_user_edit': show_user_edit,
         'properties': properties,
     }
+
     return render(request, 'yourhome/user_profile.html', context)
 
 
@@ -96,13 +96,21 @@ def logout_user(request):
 
 
 def filter_properties(request, queryset, filters):
-    property_filter = PropertyFilter(filters, queryset=queryset)
+    price_min = filters.get('price_min', '')
+    price_max = filters.get('price_max', '')
 
-    if property_filter.is_valid():
-        return property_filter.qs
-    else:
-        messages.error(request, 'Please enter valid filters.')
-        return queryset.none()
+    for filter_name, filter_value in filters.items():
+        if filter_value and filter_name not in ['price_min', 'price_max']:
+            queryset = queryset.filter(**{filter_name: filter_value})
+
+    if price_min.isdigit() and price_max.isdigit():
+        if int(price_min) > int(price_max):
+            messages.error(request, 'Please enter a valid price range.')
+            queryset = queryset.none()
+        else:
+            queryset = queryset.filter(price__gte=price_min, price__lte=price_max)
+
+    return queryset
 
 
 def home(request): 
@@ -229,7 +237,6 @@ def property_form(request, pk=None):
     return render(request, 'yourhome/property_form.html', context)
 
 
-@login_required
 def property_view(request, pk):
     property = get_object_or_404(Property, pk=pk)
     properties = Property.objects.all()

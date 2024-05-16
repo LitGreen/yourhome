@@ -97,7 +97,7 @@ class Property(TimeStampedUUIDModel):
         verbose_name=_("Property Type"),
         max_length=50,
         choices=PropertyType.choices,
-         default=PropertyType.HOUSE,
+        default=PropertyType.HOUSE,
     )
 
     plot_area = models.DecimalField(
@@ -128,30 +128,35 @@ class Property(TimeStampedUUIDModel):
     cover_photo = models.ImageField(
         verbose_name=_("Main Photo"), upload_to='static/images/properties/', null=True, blank=True
     )
+
     photo1 = models.ImageField(
         verbose_name=_("Photo 1"),
         upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
+
     photo2 = models.ImageField(
         verbose_name=_("Photo 2"),
         upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
+
     photo3 = models.ImageField(
         verbose_name=_("Photo 3"),
         upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
+
     photo4 = models.ImageField(
         verbose_name=_("Photo 4"),
         upload_to='static/images/properties/',
         null=True,
         blank=True,
     )
+    
     published_status = models.BooleanField(
         verbose_name=_("Published Status"), default=False
     )
@@ -176,7 +181,7 @@ class Property(TimeStampedUUIDModel):
 
     @property
     def cover_photo_filename(self):
-            return os.path.basename(self.cover_photo.file.name)
+            return os.path.basename(self.cover_photo.name)
 
     def __str__(self):
         return self.title
