@@ -48,12 +48,34 @@ class MultiselectFilterForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='city-autocomplete', attrs={'data-placeholder': 'Enter a city or town name'}),
         required=False
     )
-    property_type = forms.ChoiceField(choices=[('Any', 'Any')] + list(Property.PropertyType.choices), required=False)
-    price_min = forms.IntegerField(min_value=0, required=False, widget=forms.NumberInput(attrs={'placeholder': 'Min Price'}))
-    price_max = forms.IntegerField(min_value=0, required=False, widget=forms.NumberInput(attrs={'placeholder': 'Max Price'}))
-    total_floors = forms.MultipleChoiceField(choices=Property.TotalFloors.choices, widget=forms.CheckboxSelectMultiple, required=False)
-    bedrooms = forms.MultipleChoiceField(choices=Property.Bedrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
-    bathrooms = forms.MultipleChoiceField(choices=Property.Bathrooms.choices, widget=forms.CheckboxSelectMultiple, required=False)
+    property_type = forms.ChoiceField(
+        choices=[('Any', 'Any')] + list(Property.PropertyType.choices),
+        required=False
+    )
+    price_min = forms.IntegerField(
+        min_value=0, 
+        required=False,
+        widget=forms.NumberInput(attrs={'placeholder': 'Min Price'})
+    )
+    price_max = forms.IntegerField(
+        min_value=0, required=False,
+        widget=forms.NumberInput(attrs={'placeholder': 'Max Price'})
+    )
+    total_floors = forms.MultipleChoiceField(
+        choices=Property.TotalFloors.choices,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    bedrooms = forms.MultipleChoiceField(
+        choices=Property.Bedrooms.choices,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    bathrooms = forms.MultipleChoiceField(
+        choices=Property.Bathrooms.choices,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
     
     class Meta:
         model = Property
@@ -109,7 +131,10 @@ class MultiselectFilterForm(forms.ModelForm):
 class PropertyForm(forms.ModelForm):
     city = forms.ModelChoiceField(
         queryset=City.objects.all(),
-        widget=autocomplete.ModelSelect2(url='city-autocomplete', attrs={'data-placeholder': 'Enter a city or town name'}),
+        widget=autocomplete.ModelSelect2(
+            url='city-autocomplete',
+            attrs={'data-placeholder': 'Enter a city or town name'}
+            ),
         required=False
     )
   
@@ -138,6 +163,7 @@ class PropertyForm(forms.ModelForm):
             instance.country = uk
         instance.save() 
         return instance
+
 
 class PropertyViewForm(forms.ModelForm):
     city = forms.CharField(disabled=True)

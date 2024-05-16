@@ -1,6 +1,7 @@
 import django_filters
 from .models import Property
 
+
 class PropertyFilter(django_filters.FilterSet):
     advert_type = django_filters.CharFilter(
         field_name="advert_type", lookup_expr="iexact"
