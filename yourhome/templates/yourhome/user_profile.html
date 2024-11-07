@@ -69,7 +69,7 @@
     </div>
 
 </div>
-<h2 class="container">Active Properties from {{user.first_name}}</h2>
+<h2 class="container">Active Properties from {{user.username|capfirst}}</h2>
 {% include './properties_gallery.html' with properties=properties %}
 
 {% endblock content %}
