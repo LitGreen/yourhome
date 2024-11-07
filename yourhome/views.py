@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from .models import Property, Avatar
 from .filters import PropertyFilter
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,6 +13,8 @@ from dal import autocomplete
 from django.contrib.auth import get_user_model
 from django.apps import apps
 from django.contrib.auth.decorators import login_required
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 
 
@@ -259,6 +262,35 @@ def property_view(request, pk):
     }
 
     return render(request, 'yourhome/property_view.html', context)
+
+
+def generate_pdf(request):
+    filters = {
+        'city__id': request.GET.get('city'),
+        'advert_type': request.GET.get('advert_type'),
+        'property_type': request.GET.get('property_type') if request.GET.get('property_type') != 'Any' else None,
+        'price_min': request.GET.get('price_min', ''),
+        'price_max': request.GET.get('price_max', ''),
+    }
+
+    queryset = Property.objects.all()
+    queryset = filter_properties(request, queryset, filters)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="filtered_properties.pdf"'
+
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    p.drawString(100, height - 100, "Filtered Properties:")
+    y = height - 120
+    for property in queryset:
+        p.drawString(100, y, f"Title: {property.title}, City: {property.city.name}, Type: {property.property_type}, Price: {property.price}, Total floors: {property.total_floors}, Bedrooms: {property.bedrooms}, Bathrooms: {property.bathrooms},")
+        y -= 20
+
+    p.showPage()
+    p.save()
+    return response
 
 
 @login_required

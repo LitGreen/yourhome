@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CityAutocomplete
+from .views import CityAutocomplete, generate_pdf
 from . import views
 from django.conf import settings
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
     path('user_profile/<str:pk>', views.user_profile, name="user_profile"),
     path('images_gallery', views.images_gallery, name="images_gallery"),
+    path('generate_pdf/', generate_pdf, name='generate_pdf'),
 
 ]
 
