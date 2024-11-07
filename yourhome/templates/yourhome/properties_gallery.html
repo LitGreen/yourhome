@@ -6,6 +6,19 @@
 {% block content %}
 
 <div class="container">
+    <div class="row justify-content-end px-3">
+        <form method="get" action="{% url 'generate_pdf' %}">
+            <input type="hidden" name="title" value="{{ request.GET.title }}">
+            <input type="hidden" name="city" value="{{ request.GET.city }}">
+            <input type="hidden" name="advert_type" value="{{ request.GET.advert_type }}">
+            <input type="hidden" name="property_type" value="{{ request.GET.property_type }}">
+            <input type="hidden" name="price_min" value="{{ request.GET.price_min }}">
+            <input type="hidden" name="total_floors" value="{{ request.GET.total_floors }}">
+            <input type="hidden" name="bedrooms" value="{{ request.GET.bedrooms }}">
+            <input type="hidden" name="bathrooms" value="{{ request.GET.bathrooms }}">
+            <button type="submit">Download PDF</button>
+        </form>
+    </div>
     <div class="row justify-content-start">
         {% for property in properties %}
         <div class="col-sm-3 py-3 border-bottom d-flex flex-column justify-content-between">
