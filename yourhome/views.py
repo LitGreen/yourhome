@@ -14,6 +14,9 @@ from django.contrib.auth import get_user_model
 from django.apps import apps
 from django.contrib.auth.decorators import login_required
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.pdfgen import canvas
 
 
@@ -264,6 +267,7 @@ def property_view(request, pk):
     return render(request, 'yourhome/property_view.html', context)
 
 
+@login_required
 def generate_pdf(request):
     filters = {
         'city__id': request.GET.get('city'),
@@ -271,6 +275,9 @@ def generate_pdf(request):
         'property_type': request.GET.get('property_type') if request.GET.get('property_type') != 'Any' else None,
         'price_min': request.GET.get('price_min', ''),
         'price_max': request.GET.get('price_max', ''),
+        'total_floors': request.GET.get('total_floors', ''),
+        'bedrooms': request.GET.get('bedrooms', ''),
+        'bathrooms': request.GET.get('bathrooms', ''),
     }
 
     queryset = Property.objects.all()
@@ -279,17 +286,40 @@ def generate_pdf(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="filtered_properties.pdf"'
 
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
 
-    p.drawString(100, height - 100, "Filtered Properties:")
-    y = height - 120
+    data = [
+        ['Ref Code', 'Title', 'City', 'Type', 'Price', 'Total floors', 'Bedrooms', 'Bathrooms', 'Listed by']
+    ]
+
     for property in queryset:
-        p.drawString(100, y, f"Title: {property.title}, City: {property.city.name}, Type: {property.property_type}, Price: {property.price}, Total floors: {property.total_floors}, Bedrooms: {property.bedrooms}, Bathrooms: {property.bathrooms},")
-        y -= 20
+        data.append([
+            property.ref_code,
+            property.title,
+            property.city.name,
+            property.property_type,
+            property.price,
+            property.total_floors,
+            property.bedrooms,
+            property.bathrooms,
+            property.creator,
+        ])
 
-    p.showPage()
-    p.save()
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.whitesmoke),
+        ('GRID', (0, 0), (-1, -1), 1, colors.darkgray),
+    ]))
+
+    elements.append(table)
+    doc.build(elements)
+
     return response
 
 
